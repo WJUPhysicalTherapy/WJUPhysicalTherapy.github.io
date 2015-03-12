@@ -17,3 +17,12 @@ function handleAuthResult(authResult) {
 		createPicker();
 	}
 }
+
+function createPicker(){
+	var picker = new google.picker.PickerBuilder()
+		.addView(new google.picker.DocsUploadView())
+		.setOAuthToken(oauthToken)
+		.setDeveloperKey('AIzaSyB3tvrtGf2DSPqhr2EkzmX4o6_DZDQCyNs')
+		.build();
+	picker.setVisible(true);
+}
