@@ -5,6 +5,6 @@ function addObjective(){
 	element.setAttribute("value", "");
 	element.setAttribute("name", "Test Name");
 	
-	var foo = document.getElementById("objectivesDiv");
-	document.foo.appendChild(element);
+	//var foo = document.getElementById("objectivesDiv");
+	document.getElementById("objectivesDiv").appendChild(element);
 }
