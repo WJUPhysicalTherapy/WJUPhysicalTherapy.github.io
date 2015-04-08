@@ -333,7 +333,7 @@
 					<button class="btn btn-default" type="button" id="addObjective" name="addObjective" onclick="addObjective()">Add</button>
 					</div>
                 </fieldset>
-                <button type="submit" name="syllabusFormSubmit" class="btn btn-default">Submit</button>
+            <button type="submit" name="syllabusFormSubmit" class="btn btn-default">Submit</button>
 				
             </form>
         </div>

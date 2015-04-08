@@ -48,7 +48,7 @@
 		<table>
 			<tr>
 				<th>Course Number:</th>
-				<td>DPT 617</td>
+				<td><?php echo $_POST["courseNumber"]; ?></td>
 			</tr>
 			<tr></tr>
 			<tr>
@@ -230,7 +230,6 @@ citizens to promote positive change within their community.</td>
 						<li>Apply basic physical therapy skills acquired during the didactic preparation in Term I. (3*)</li>
 					</ol>
 				</p>
-				<p>*Major Categories in the Taxonomy of Educational Objectives (Bloom 1956)
-</p>
+				<p>*Major Categories in the Taxonomy of Educational Objectives (Bloom 1956)</p>
 	<body>
 </html>
