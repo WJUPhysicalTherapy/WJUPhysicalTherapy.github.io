@@ -9,7 +9,8 @@
     <meta content="" name="author">
     <link href="../../favicon.ico" rel="icon">
 
-    <title>Starter Template for Bootstrap</title><!-- Bootstrap core CSS -->
+    <title>Add Syllabus</title>
+	<!-- Bootstrap core CSS -->
     <link href="../css/bootstrap.css" rel="stylesheet">
     <!-- Custom styles for this template -->
     <link href="../css/dashboard.css" rel="stylesheet">
@@ -98,13 +99,9 @@
 
 
                     <div class="control-group">
-                        <label class="control-label" for="courseNumber">Course
-                        Number</label>
-
+                        <label class="control-label" for="courseNumber">Course Number</label>
                         <div class="controls">
-                            <input class="input-xlarge" id="courseNumber" name=
-                            "courseNumber" placeholder="Enter Course Number"
-                            type="text">
+                            <input class="input-xlarge" id="courseNumber" name="courseNumber" placeholder="Enter Course Number" type="text">
                         </div>
                     </div>
                     <!-- Text input-->
@@ -347,6 +344,18 @@
         <p>
         </p>
     </div>
+	<script>
+	function addObjective(){
+		var element = document.createElement("BUTTON");
+		
+		//element.setAttribute("type", "text");
+		//element.setAttribute("value", "");
+		//element.setAttribute("name", "Test Name");
+		
+		//var foo = document.getElementById("objectivesDiv");
+		document.getElementById("objectivesDiv").appendChild(element);
+	}
+	</script>
     <!-- /.container */-->
     <!-- Bootstrap core JavaScript
     ================================================== -->

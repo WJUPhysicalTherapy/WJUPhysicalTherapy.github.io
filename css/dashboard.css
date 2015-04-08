@@ -103,3 +103,14 @@ body {
   display: inline-block;
   border-radius: 50%;
 }
+
+
+/*
+ * Form CSS for Adding Syllabus 
+ */
+ @media(min-width:768px){
+	.controls{
+		padding-left: 100px;
+		display: inline;
+	}
+}
