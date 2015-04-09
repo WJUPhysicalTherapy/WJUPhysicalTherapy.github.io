@@ -1,5 +1,6 @@
 <html>
 <head>
+	<title><?php echo $_POST["courseTitle"]; ?></title>
 	<style>
 		body{
 			font-family: "Times New Roman", Times, serif; 
@@ -53,30 +54,32 @@
 			<tr></tr>
 			<tr>
 				<th>Course Title:</th>
-				<td>SERVICE LEARNING I </td>
+				<td><?php echo $_POST["courseTitle"]; ?></td>
 			</tr>
 			<tr></tr>
 			<tr>
 				<th>Contact Hours:</th>
-				<td>3 hours per week</td>
+				<td><?php echo $_POST["contactHours"]; ?> hours per week</td>
 			</tr>
 			<tr></tr>
 			<tr>
 				<th>Credits:</th>
-				<td>1</td>
+				<td><?php echo $_POST["credits"]; ?></td>
 			</tr>
 			<tr class="spacer"><td>  </td></tr>
 			<tr>
 				<th>Description:</th>
-				<td>This course will provide physical therapy students with the opportunity to evaluate and
-serve the needs of the local community utilizing basic exam and treatment skills under 
-faculty supervision. The students will evaluate their role as health professionals and as
-citizens to promote positive change within their community.</td>
+				<td><?php echo $_POST["description"]; ?></td>
 			</tr>
 			<tr class="spacer"></tr>
 			<tr>
 				<th>Schedule:</th>
-				<td>Wednesdays and Fridays throughout Term II and III from 1:00 pm – 4:00. </td>
+				<td><?php
+				$schedule = $_POST["schedule"];
+				foreach ($schedule as $day => $n) {
+					echo $schedule[$day].", ";
+				} ?>
+				</td>
 			</tr>
 			<tr></tr>
 			<tr>
@@ -86,16 +89,11 @@ citizens to promote positive change within their community.</td>
 			<tr class="spacer"></tr>
 			<tr>
 				<th>Faculty:</th>
-				<td>Craig Ruby, PT, DEd, MPT– Course Coordinator
-				<br/>Allen Marangoni, PT, EdD, RRT
-				<br/>Maureen McKenna, PT, PhD, LPC
-				<br/>Carrie Abraham, PT, MPH, DPT
-				<br/>Alison Kreger, PT, DPT, PCS
-				<br/>Sheryl Holt, PT, MS
-				<br/>Mark Drnach, PT, DPT, MBA, PCS
-				<br/>Kristine Grubler, PT, DPT
-				<br/>Rhonda Haley, PT, DPT, ATC
-				<br/>Mohammad Haddadzadeh, BPT, MPT, PDCR, PhD</td>
+				<td><?php
+				$faculty = $_POST["faculty"];
+				foreach ($faculty as $professor) {
+					echo $professor."<br />";
+				} ?></td>
 			</tr>
 			<tr class="spacer"></tr>
 			<tr>
