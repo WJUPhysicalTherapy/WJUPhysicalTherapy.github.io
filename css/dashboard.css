@@ -110,7 +110,7 @@ body {
  */
  @media(min-width:768px){
 	.controls{
-		padding-left: 100px;
-		display: inline;
+		/*padding-left: 100px;
+		display: inline;*/
 	}
 }

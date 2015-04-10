@@ -98,21 +98,31 @@
                 <legend>Add a Syllabus</legend> <!-- Text input-->
 
 
-                <div class="control-group">
-                  <label class="control-label" for="courseNumber">Course Number</label>
-                  <div class="controls">
-                    <input class="input-xlarge" id="courseNumber" name="courseNumber" placeholder="Enter Course Number" type="text">
+                <!--<div class="form-group">
+                  <label class="col-md-4 control-label" for="courseNumber">Course Number</label>
+                  <div class="col-md-6">
+                    <input class="form-control input-md" id="courseNumber" name="courseNumber" 
+					placeholder="Enter Course Number" type="text">
                   </div>
                 </div>
                 <!-- Text input-->
+				<!-- Text input-->
+				<div class="form-group">
+				  <label class="col-md-4 control-label" for="courseNumber">Course Number:</label>  
+				  <div class="col-md-6">
+				  <input id="courseNumber" name="courseNumber" type="text" 
+				  placeholder="Enter Course Number" class="form-control input-md">
+					
+				  </div>
+				</div>
 
 
-                <div class="control-group">
-                  <label class="control-label" for="courseTitle">Course
+                <div class="form-group">
+                  <label class="col-md-4 control-label" for="courseTitle">Course
                     Title</label>
 
-                    <div class="controls">
-                      <input class="input-xlarge" id="courseTitle" name=
+                    <div class="col-md-6">
+                      <input class="form-control input-md" id="courseTitle" name=
                       "courseTitle" placeholder="Enter Title" type=
                       "text">
                     </div>
@@ -120,12 +130,12 @@
                   <!-- Text input-->
 
 
-                  <div class="control-group">
-                    <label class="control-label" for="contactHours">Contact
+                  <div class="form-group">
+                    <label class="col-md-4 control-label" for="contactHours">Contact
                       Hours</label>
 
-                      <div class="controls">
-                        <input class="input-xlarge" id="contactHours" name=
+                      <div class="col-md-6">
+                        <input class="form-control input-md" id="contactHours" name=
                         "contactHours" placeholder="Enter Contact Hourse"
                         type="text">
                       </div>
@@ -133,53 +143,53 @@
                     <!-- Text input-->
 
 
-                    <div class="control-group">
-                      <label class="control-label" for=
+                    <div class="form-group">
+                      <label class="col-md-4 control-label" for=
                       "credits">Credits</label>
 
-                      <div class="controls">
-                        <input class="input-xlarge" id="credits" name=
+                      <div class="col-md-6">
+                        <input class="form-control input-md" id="credits" name=
                         "credits" placeholder="Enter Credits" type="text">
                       </div>
                     </div>
                     <!-- Textarea -->
 
 
-                    <div class="control-group">
-                      <label class="control-label" for=
+                    <div class="form-group">
+                      <label class="col-md-4 control-label" for=
                       "description">Description</label>
 
-                      <div class="controls">
+                      <div class="col-md-6">
                         <textarea id="description" name="description"></textarea>
                       </div>
                     </div>
                     <!-- Multiple Checkboxes (inline) -->
 
 
-                    <div class="control-group">
-                      <label class="control-label" for=
+                    <div class="form-group">
+                      <label class="col-md-4 control-label" for=
                       "schedule">Schedule</label>
 
-                      <div class="controls">
-                        <label class="checkbox inline" for=
+                      <div class="col-md-6">
+                        <label class="checkbox-inline" for=
                         "schedule-0"><input id="schedule-0" name="schedule[]"
                         type="checkbox" value="Monday"> Monday</label>
-                        <label class="checkbox inline" for=
+                        <label class="checkbox-inline" for=
                         "schedule-1"><input id="schedule-1" name="schedule[]"
                         type="checkbox" value="Tuesday"> Tuesday</label>
-                        <label class="checkbox inline" for=
+                        <label class="checkbox-inline" for=
                         "schedule-2"><input id="schedule-2" name="schedule[]"
                         type="checkbox" value="Wednesday">
-                        Wednesday</label> <label class="checkbox inline"
+                        Wednesday</label> <label class="checkbox-inline"
                         for="schedule-3"><input id="schedule-3" name=
                         "schedule[]" type="checkbox" value="Thursday">
-                        Thursday</label> <label class="checkbox inline"
+                        Thursday</label> <label class="checkbox-inline"
                         for="schedule-4"><input id="schedule-4" name=
                         "schedule[]" type="checkbox" value="Friday">
-                        Friday</label> <label class="checkbox inline" for=
+                        Friday</label> <label class="checkbox-inline" for=
                         "schedule-5"><input id="schedule-5" name="schedule[]"
                         type="checkbox" value="Saturday"> Saturday</label>
-                        <label class="checkbox inline" for=
+                        <label class="checkbox-inline" for=
                         "schedule-6"><input id="schedule-6" name="schedule[]"
                         type="checkbox" value="Sunday"> Sunday</label>
                       </div>
@@ -187,12 +197,12 @@
                     <!-- Text input-->
 
 
-                    <div class="control-group">
-                      <label class="control-label" for=
+                    <div class="form-group">
+                      <label class="col-md-4 control-label" for=
                       "faculty1">Faculty</label>
 
-                      <div class="controls">
-                        <input class="input-xlarge" id="faculty1" name=
+                      <div class="col-md-6">
+                        <input class="form-control input-md" id="faculty1" name=
                         "faculty[]" placeholder="Enter a Faculty Member"
                         type="text">
                       </div>
@@ -200,10 +210,10 @@
                     <!-- Button -->
 
 
-                    <div class="control-group">
-                      <label class="control-label" for="addFaculty"></label>
+                    <div class="form-group">
+                      <label class="col-md-4 control-label" for="addFaculty"></label>
 
-                      <div class="controls">
+                      <div class="col-md-6">
                         <button class="btn btn-default" id="addFaculty"
                         name="addFaculty">Add</button>
                       </div>
@@ -211,25 +221,57 @@
                     <!-- Text input-->
 
 
-                    <div class="control-group">
-                      <label class="control-label" for="officeHours">Office
-                        Hours</label>
+                    <!-- Text input-->
+					<div class="form-group">
+					  <label class="col-md-4 control-label" for="office_hours_time">Office Hours Time:</label>
+					  <div class="col-md-6">
+						<input id="office_hours_time" name="office_hours_time" type="text" placeholder="Ex: 11-2" class="form-control input-md">
+					  </div>
+					</div>
 
-                        <div class="controls">
-                          <input class="input-xlarge" id="officeHours" name=
-                          "officeHours" placeholder="Enter Office Hours"
-                          type="text">
-                        </div>
-                      </div>
+					<!-- Multiple Checkboxes (inline) -->
+					<div class="form-group">
+					  <label class="col-md-4 control-label" for="office_hours_days">Office Hours Days:</label>
+					  <div class="col-md-6">
+						<label class="checkbox-inline" for="office_hours_days-0">
+						  <input type="checkbox" name="office_hours_days" id="office_hours_days-0" value="Monday">
+						  Monday
+						</label>
+						<label class="checkbox-inline" for="office_hours_days-1">
+						  <input type="checkbox" name="office_hours_days" id="office_hours_days-1" value="Tuesday">
+						  Tuesday
+						</label>
+						<label class="checkbox-inline" for="office_hours_days-2">
+						  <input type="checkbox" name="office_hours_days" id="office_hours_days-2" value="Wednesday">
+						  Wednesday
+						</label>
+						<label class="checkbox-inline" for="office_hours_days-3">
+						  <input type="checkbox" name="office_hours_days" id="office_hours_days-3" value="Thursday">
+						  Thursday
+						</label>
+						<label class="checkbox-inline" for="office_hours_days-4">
+						  <input type="checkbox" name="office_hours_days" id="office_hours_days-4" value="Friday">
+						  Friday
+						</label>
+						<label class="checkbox-inline" for="office_hours_days-5">
+						  <input type="checkbox" name="office_hours_days" id="office_hours_days-5" value="Saturday">
+						  Saturday
+						</label>
+						<label class="checkbox-inline" for="office_hours_days-6">
+						  <input type="checkbox" name="office_hours_days" id="office_hours_days-6" value="Sunday">
+						  Sunday
+						</label>
+					  </div>
+					</div>
                       <!-- Text input-->
 
 
-                      <div class="control-group">
-                        <label class="control-label" for=
+                      <div class="form-group">
+                        <label class="col-md-4 control-label" for=
                         "resources">Resources</label>
 
-                        <div class="controls">
-                          <input class="input-xlarge" id="resources" name=
+                        <div class="col-md-6">
+                          <input class="form-control input-md" id="resources" name=
                           "resources" placeholder="Enter Resources" type=
                           "text">
                         </div>
@@ -237,11 +279,11 @@
                       <!-- Multiple Checkboxes -->
 
 
-                      <div class="control-group">
-                        <label class="control-label" for=
+                      <div class="form-group">
+                        <label class="col-md-4 control-label" for=
                         "additionalItems">Additional Items</label>
 
-                        <div class="controls">
+                        <div class="col-md-6">
                           <label class="checkbox" for=
                           "additionalItems-0"><input id="additionalItems-0"
                           name="additionalItems" type="checkbox" value=
@@ -283,11 +325,11 @@
 
                       <div id="objectivesDiv">
                         <!-- Button Drop Down -->
-                        <div class="control-group">
-                          <label class="control-label" for="objectives">Objective 1</label>
-                          <div class="controls">
+                        <div class="form-group">
+                          <label class="col-md-4 control-label" for="objectives">Objective 1</label>
+                          <div class="col-md-6">
                            <div class="input-append">
-                             <input id="objectives" name="objectives" class="input-xlarge" placeholder="Objective" type="text">
+                             <input id="objectives" name="objectives" class="form-control input-md" placeholder="Objective" type="text">
                              <div class="btn-group">
                               <button class="btn dropdown-toggle" data-toggle="dropdown">
                                 Taxonomy
@@ -306,11 +348,11 @@
                         </div>
                       </div>
                       <!--End DropDown-->
-                      <div class="control-group">
-                        <label class="control-label" for="objectives">Objective 2</label>
-                        <div class="controls">
+                      <div class="form-group">
+                        <label class="col-md-4 control-label" for="objectives">Objective 2</label>
+                        <div class="col-md-6">
                          <div class="input-append">
-                           <input id="objectives" name="objectives" class="input-xlarge" placeholder="Objective" type="text">
+                           <input id="objectives" name="objectives" class="form-control input-md" placeholder="Objective" type="text">
                            <div class="btn-group">
                             <button class="btn dropdown-toggle" data-toggle="dropdown">
                               Taxonomy
@@ -330,11 +372,21 @@
                     </div>
                     <!--End DropDown-->
                   </div><!--End Objectives-->
-                  <button class="btn btn-default" type="button" id="addObjective" name="addObjective" onclick="addObjective()">Add</button>
+				  <div class="form-group">
+                      <label class="col-md-4 control-label" for="addObjective"></label>
+
+                      <div class="col-md-6">
+                        <button class="btn btn-default" id="addFaculty"
+                        name="addObjective">Add</button>
+                      </div>
+                    </div>
+                  
                 </div>
               </fieldset>
-              <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2">
-              <button type="submit" name="syllabusFormSubmit" class="btn btn-default">Submit</button>
+              <div class="form-group">
+				<div class="col-md-6">
+					<button type="submit" name="syllabusFormSubmit" class="btn btn-default">Submit</button>
+				</div>
               </div>
             </form>
           </div>
@@ -345,7 +397,7 @@
           <p>
           </p>
         </div>
-		<?php 
+		<?php /*
 			$servername = "wjuphysicaltherapy.com";
 			$username = "wjuphysi_chafo";
 			$password = "physical2015";
@@ -371,7 +423,7 @@
 				echo "Error:".$sql."<br/>".$conn->error;
 			}
 			
-			$conn->close();
+			$conn->close();*/
 		?>
         <script>
          function addObjective(){
