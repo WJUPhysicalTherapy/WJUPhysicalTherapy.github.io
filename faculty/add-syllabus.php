@@ -345,6 +345,34 @@
           <p>
           </p>
         </div>
+		<?php 
+			$servername = "wjuphysicaltherapy.com";
+			$username = "wjuphysi_chafo";
+			$password = "physical2015";
+			$dbname = "wjuphysi_syllabus";
+			
+			//Create Connection
+			$conn = new mysqli($servername, $username, $password, $dbname);
+			//Check Connection
+			if($conn->connect_error){
+				die("Connection failed: ".$conn->connect_error);
+			}
+			
+			$sql = "INSERT INTO `syllabus`(`course_number`, `course_title`, `contact_hours`, `credits`,
+			`description`, `schedule`, `location`, `faculty`, `office_hours`, `phone`, `email`, `academic_dishonesty_policy`,
+			`academic_integrity`, `attendance_policy`, `professional_behavior_exceptions`, `electronic_devices`, `examinations`,
+			`arc`, `disability_sevices`, `grading_policy`, `objectives`, `resources`, `taxonomy`)
+			VALUES (courseNumber,courseTitle,contactHours,credits,description,schedule,location,faculty,officeHours,phone,email,
+			null,null,null,null,null,null,null,null,null,objectives,null,null)"
+			
+			if($conn->multi_query($sql) == TRUE){
+				echo "New records created successfully";
+			}else{
+				echo "Error:".$sql."<br/>".$conn->error;
+			}
+			
+			$conn->close();
+		?>
         <script>
          function addObjective(){
           var element = document.createElement("BUTTON");
