@@ -95,17 +95,8 @@
             <form class="form-horizontal" name="addForm" method="post" action="syllabus_html_template.php">
               <fieldset>
                 <!-- Form Name -->
-                <legend>Add a Syllabus</legend> <!-- Text input-->
+                <legend>Add a Syllabus</legend>
 
-
-                <!--<div class="form-group">
-                  <label class="col-md-4 control-label" for="courseNumber">Course Number</label>
-                  <div class="col-md-6">
-                    <input class="form-control input-md" id="courseNumber" name="courseNumber" 
-					placeholder="Enter Course Number" type="text">
-                  </div>
-                </div>
-                <!-- Text input-->
 				<!-- Text input-->
 				<div class="form-group">
 				  <label class="col-md-4 control-label" for="courseNumber">Course Number:</label>  
