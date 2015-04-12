@@ -1,19 +1,45 @@
 <?php
 class Database {
-	protected $_link, $_result, $_numRows;
+	protected $conn, $_result, $_numRows;
 	
 	public function __construct($server, $username, $password, $db){
-		$this->_link = mysqli_connect($server, $username, $password);
-		mysql_select_db($db, $this->_link);
+		global $conn;
+		$conn = mysqli_connect($server, $username, $password, $db);
+		if(!$conn){
+			die("Connection Failed: ".mysqli_connect_error());
+		}
+		echo "Connected Successfully<br/>";
 	}
 	
 	public function disconnect() {
-		mysql_close($this->_link);
+		mysql_close($conn);
 	}
 	
 	public function query($sql){
-		$this->_result  = mysql_query($sql, $this->_link);
-		$this->_numRows = mysql_num_rows($this->_result);
+		global $conn;
+		//echo $sql;
+		
+		if(!$conn){
+			echo $sql."hello";
+			echo "Boo No Connection!";
+		}
+		//$sql = "SELECT course_title FROM classes"
+		$result = mysqli_query($conn, $sql);
+		//echo $conn;
+		if(mysqli_num_rows($result) > 0){
+			//output data of each row
+			
+			while($row = mysqli_fetch_assoc($result)){
+				echo "<tr><td>".$row["course_number"]."</td>
+						  <td>".$row["course_title"]."</td>
+						  <td>".$row["contact_hours"]."</td>
+						  <td>".$row["credits"]."</td>
+						  <td>".$row["schedule"]."</td>
+					  </tr>";
+			}
+		} else {
+			echo "0 results";
+		}
 	}
 	
 	public function numRows() {
@@ -26,3 +52,4 @@ class Database {
 		
 	}
 }
+?>
