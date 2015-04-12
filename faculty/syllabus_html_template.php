@@ -84,7 +84,7 @@
 			<tr></tr>
 			<tr>
 				<th>Location:</th>
-				<td>Schedule of rotations and student groups attached to syllabus</td>
+				<td><?php echo $_POST["location"]; ?></td>
 			</tr>
 			<tr class="spacer"></tr>
 			<tr>
@@ -98,28 +98,46 @@
 			<tr class="spacer"></tr>
 			<tr>
 				<th>Office Hours:</th>
-				<td>Craig Ruby-posted on cruby.youcanbook.me</td>
+				<td><?php echo $_POST["office_hours_time"]; ?></td>
 			</tr>
 			<tr></tr>
 			<tr>
 				<th>Phone:</th>
-				<td>243-7201 Ext 110</td>
+				<td><?php echo $_POST["phoneNumber"]; ?></td>
 			</tr>
 			<tr></tr>
 			<tr>
 				<th>E-Mail:</th>
-				<td>cruby@wju.edu</td>
+				<td><?php echo $_POST["email"]; ?></td>
 			</tr>
 			<tr class="spacer"></tr>
 			<tr>
 				<th>Resources:</th>
-				<td>Drnach, M., Developing Cultural Awareness.  Paper 1.
-				Readings will be assigned by faculty at the service learning sites for reflection</td>
+				<td><?php echo $_POST["resources"]; ?></td>
 			</tr>
 			<tr></tr>
-			<tr>
-				<th>Academic Dishonesty Policy:</th>
-				<td>Please refer to PT Student Handbook.</td>
+			<tr><td>
+				<?php 
+					$items = $_POST["additionalItems"];
+					if(empty($items)){
+						echo "Nothing Here";
+					}else{
+						$n = count($items);
+
+						for($i=0; $i<$n; $i++){
+							echo $items[$i]." ";
+						}
+					}
+					//if(isset($_POST["additionalItems"]) && $_POST["academicDishonestyPolicy"]=='yes'){
+						//echo "Working";
+						//"<tr>
+						//<th>Academic Dishonesty Policy:</th>
+						//	<td>Please refer to PT Student Handbook.</td>
+						//</tr>";
+					//}
+					
+				?>
+				</td>
 			</tr>
 			<tr></tr>
 			</table>
@@ -215,8 +233,14 @@
 				</p>
 				<p><span class="title">Objectives:</span>The student will be able to:
 					<ol>
-						<li>Articulate the history of the Jesuit mission as it relates to the global community. (2*)</li>
-						<li>To identify attributes of his or her own culture and cultural practices; (2*)</li>
+						<?php
+							$objective = $_POST["objective"];
+							$taxonomy = $_POST["taxonomy"];
+							for ($x =0; $x < sizeof($objective); $x++) {
+								echo "<li>".$objective[$x]." (".$taxonomy[$x]."*)</li>";
+							} 
+						?>
+						<!--<li>To identify attributes of his or her own culture and cultural practices; (2*)</li>
 						<li>Examine the organizational structure of an organization and its purpose both internally and externally. (1*)</li>
 						<li>Develop an appreciation for professional, social and civic responsibility. (2*)</li>
 						<li>Acquire skills to become effective in advocacy. (2*)</li>
@@ -226,7 +250,7 @@
 						<li>Examine the quality of the service delivery and the factors that influence the quality. (2*)</li>
 						<li>Allow students to develop skills in public education and consultation including, but not limited to the subjects of prevention, wellness and health promotion. (2*)</li>
 						<li>Apply basic physical therapy skills acquired during the didactic preparation in Term I. (3*)</li>
-					</ol>
+					--></ol>
 				</p>
 				<p>*Major Categories in the Taxonomy of Educational Objectives (Bloom 1956)</p>
 	<body>

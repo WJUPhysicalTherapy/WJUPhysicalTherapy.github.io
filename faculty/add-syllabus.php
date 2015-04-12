@@ -1,3 +1,17 @@
+<?php
+//define variables and set to empty values
+$courseNumberErr = $courseTitleErr = $contactHoursErr = $creditsErr = $descriptionErr = $scheduleErr = $facultyErr = "";
+$courseNumber = $courseTitle = $contactHours = $credits = $description = $schedule = $faculty = "";
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+	if(empty($_POST["courseNumber"])){
+		$courseNumberErr = "Course number required";
+	} else {
+		$courseNumber = test_input($POST["courseNumber"]);
+	}
+}
+?>
+
 <!DOCTYPE html>
 
 <html lang="en">
@@ -101,8 +115,8 @@
 				<div class="form-group">
 				  <label class="col-md-4 control-label" for="courseNumber">Course Number:</label>  
 				  <div class="col-md-6">
-				  <input id="courseNumber" name="courseNumber" type="text" 
-				  placeholder="Enter Course Number" class="form-control input-md">
+				  <input id="courseNumber" name="courseNumber" type="number" 
+				  placeholder="Enter Course Number" class="form-control input-md" >
 					
 				  </div>
 				</div>
@@ -113,9 +127,8 @@
                     Title</label>
 
                     <div class="col-md-6">
-                      <input class="form-control input-md" id="courseTitle" name=
-                      "courseTitle" placeholder="Enter Title" type=
-                      "text">
+                      <input class="form-control input-md" id="inputName" name=
+                      "courseTitle" placeholder="Enter Title" type="text" >
                     </div>
                   </div>
                   <!-- Text input-->
@@ -128,7 +141,7 @@
                       <div class="col-md-6">
                         <input class="form-control input-md" id="contactHours" name=
                         "contactHours" placeholder="Enter Contact Hourse"
-                        type="text">
+                        type="number" >
                       </div>
                     </div>
                     <!-- Text input-->
@@ -140,7 +153,7 @@
 
                       <div class="col-md-6">
                         <input class="form-control input-md" id="credits" name=
-                        "credits" placeholder="Enter Credits" type="text">
+                        "credits" placeholder="Enter Credits" type="number" >
                       </div>
                     </div>
                     <!-- Textarea -->
@@ -186,7 +199,16 @@
                       </div>
                     </div>
                     <!-- Text input-->
+                    <div class="form-group">
+                      <label class="col-md-4 control-label" for=
+                      "location">Location</label>
 
+                      <div class="col-md-6">
+                        <input class="form-control input-md" id="location" name=
+                        "location" placeholder="Enter the location"
+                        type="text">
+                      </div>
+                    </div>
 
                     <div class="form-group">
                       <label class="col-md-4 control-label" for=
@@ -198,6 +220,7 @@
                         type="text">
                       </div>
                     </div>
+                    <p id="addFaculty"></p>
                     <!-- Button -->
 
 
@@ -205,8 +228,8 @@
                       <label class="col-md-4 control-label" for="addFaculty"></label>
 
                       <div class="col-md-6">
-                        <button class="btn btn-default" id="addFaculty"
-                        name="addFaculty">Add</button>
+                        <button class="btn btn-default" id="addFacultyBtn"
+                        name="addFacultyBtn" type="button" onclick="addFaculty()">Add Faculty Member</button>
                       </div>
                     </div>
                     <!-- Text input-->
@@ -254,8 +277,28 @@
 						</label>
 					  </div>
 					</div>
-                      <!-- Text input-->
+                      <!-- Phone-->
+                      <div class="form-group">
+                        <label class="col-md-4 control-label" for=
+                        "email">Phone:</label>
 
+                        <div class="col-md-6">
+                          <input class="form-control input-md" id="phoneNumber" name=
+                          "phoneNumber" placeholder="Enter Phone Number" type=
+                          "phone">
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <label class="col-md-4 control-label" for=
+                        "email">Email:</label>
+
+                        <div class="col-md-6">
+                          <input class="form-control input-md" id="resources" name=
+                          "email" placeholder="Enter Email" type=
+                          "email">
+                        </div>
+                      </div>
 
                       <div class="form-group">
                         <label class="col-md-4 control-label" for=
@@ -275,111 +318,83 @@
                         "additionalItems">Additional Items</label>
 
                         <div class="col-md-6">
-                          <label class="checkbox" for=
-                          "additionalItems-0"><input id="additionalItems-0"
-                          name="additionalItems" type="checkbox" value=
-                          "Academic Dishonesty Policy"> Academic Dishonesty
-                          Policy</label> <label class="checkbox" for=
-                          "additionalItems-1"><input id="additionalItems-1"
-                          name="additionalItems" type="checkbox" value=
-                          "Statement of Academic Integrity"> Statement of
-                          Academic Integrity</label> <label class="checkbox"
+                          <label class="checkbox" for="additionalItems-0">
+	                          <input id="additionalItems-0" name="additionalItems[]" type="checkbox" value="a"> 
+	                          Academic DishonestyPolicy
+                          </label> 
+                          <label class="checkbox" for="additionalItems-1">
+	                          <input id="additionalItems-1" name="additionalItems[]" type="checkbox" value="b"> 
+	                          Statement of Academic Integrity
+                          </label> 
+                          <label class="checkbox"
                           for="additionalItems-2"><input id=
-                          "additionalItems-2" name="additionalItems" type=
-                          "checkbox" value="Attendance Policy"> Attendance
+                          "additionalItems-2" name="additionalItems[]" type=
+                          "checkbox" value="c"> Attendance
                           Policy</label> <label class="checkbox" for=
                           "additionalItems-3"><input id="additionalItems-3"
-                          name="additionalItems" type="checkbox" value=
-                          "Professional Behavior Expectations"> Professional
+                          name="additionalItems[]" type="checkbox" value=
+                          "d"> Professional
                           Behavior Expectations</label> <label class=
                           "checkbox" for="additionalItems-4"><input id=
-                          "additionalItems-4" name="additionalItems" type=
-                          "checkbox" value="Electronic Devices"> Electronic
+                          "additionalItems-4" name="additionalItems[]" type=
+                          "checkbox" value="e"> Electronic
                           Devices</label> <label class="checkbox" for=
                           "additionalItems-5"><input id="additionalItems-5"
-                          name="additionalItems" type="checkbox" value=
-                          "Examinations"> Examinations</label> <label class=
+                          name="additionalItems[]" type="checkbox" value=
+                          "f"> Examinations</label> <label class=
                           "checkbox" for="additionalItems-6"><input id=
-                          "additionalItems-6" name="additionalItems" type=
-                          "checkbox" value="Academic Resource Center(ARC)">
+                          "additionalItems-6" name="additionalItems[]" type=
+                          "checkbox" value="g">
                           Academic Resource Center(ARC)</label> <label class=
                           "checkbox" for="additionalItems-7"><input id=
-                          "additionalItems-7" name="additionalItems" type=
-                          "checkbox" value="Disability Services"> Disability
+                          "additionalItems-7" name="additionalItems[]" type=
+                          "checkbox" value="h"> Disability
                           Services</label> <label class="checkbox" for=
                           "additionalItems-8"><input id="additionalItems-8"
-                          name="additionalItems" type="checkbox" value=
-                          "Grading Policy"> Grading Policy</label>
+                          name="additionalItems[]" type="checkbox" value=
+                          "i"> Grading Policy</label>
                         </div>
                       </div>
                       <!-- Textarea -->
 
                       <div id="objectivesDiv">
-                        <!-- Button Drop Down -->
-                        <div class="form-group">
-                          <label class="col-md-4 control-label" for="objectives">Objective 1</label>
-                          <div class="col-md-6">
-                           <div class="input-append">
-                             <input id="objectives" name="objectives" class="form-control input-md" placeholder="Objective" type="text">
-                             <div class="btn-group">
-                              <button class="btn dropdown-toggle" data-toggle="dropdown">
-                                Taxonomy
-                                <span class="caret"></span>
-                              </button>
-                              <ul class="dropdown-menu">
-                                <li><a href="#">1</a></li>
-                                <li><a href="#">2</a></li>
-                                <li><a href="#">3</a></li>
-                                <li><a href="#">4</a></li>
-                                <li><a href="#">5</a></li>
-                                <li><a href="#">6</a></li>
-                              </ul>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <!--End DropDown-->
-                      <div class="form-group">
-                        <label class="col-md-4 control-label" for="objectives">Objective 2</label>
-                        <div class="col-md-6">
-                         <div class="input-append">
-                           <input id="objectives" name="objectives" class="form-control input-md" placeholder="Objective" type="text">
-                           <div class="btn-group">
-                            <button class="btn dropdown-toggle" data-toggle="dropdown">
-                              Taxonomy
-                              <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu">
-                              <li><a href="#">1</a></li>
-                              <li><a href="#">2</a></li>
-                              <li><a href="#">3</a></li>
-                              <li><a href="#">4</a></li>
-                              <li><a href="#">5</a></li>
-                              <li><a href="#">6</a></li>
-                            </ul>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <!--End DropDown-->
-                  </div><!--End Objectives-->
+	                      <div class='form-group'>
+	                      	<label class='col-md-4 control-label' for='objectives'>Objective</label>
+	                      	<div class='col-md-6'>
+	                      		<div class='input-append'>
+	                      			<input id='objectives' name='objective[]' class='form-control input-md' placeholder='Objective' type='text'>
+	                      		</div><!--End Input-append-->
+	                      	</div><!--End col-md-6-->
+	                      	<div class="col-md-2">
+						    	<select id="Taxonomy" name="taxonomy[]" class="form-control" required>
+							    	<option value="" disabled>Taxonomy</option>
+						      		<option value="1">1</option>
+						      		<option value="2">2</option>
+						      		<option value="3">3</option>
+						      		<option value="4">4</option>
+						      		<option value="5">5</option>
+						      		<option value="6">6</option>
+							    </select>
+							</div><!--End col-md-2-->
+	                      </div><!--End Form Group-->
+                    	<p id="addObjective"></p>
+                 	 </div><!--End Objectives-->
+
 				  <div class="form-group">
                       <label class="col-md-4 control-label" for="addObjective"></label>
-
                       <div class="col-md-6">
-                        <button class="btn btn-default" id="addFaculty"
-                        name="addObjective">Add</button>
+                        <button class="btn btn-default" id="addObjective" type="button" 
+                        name="addObjective" onclick="add()">Add Objective</button>
                       </div>
                     </div>
                   
                 </div>
               </fieldset>
-              <div class="form-group">
-				<div class="col-md-6">
+				<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2">
 					<button type="submit" name="syllabusFormSubmit" class="btn btn-default">Submit</button>
 				</div>
-              </div>
             </form>
+
           </div>
           <br>
           <br><br><br><br><br><br>
@@ -388,46 +403,28 @@
           <p>
           </p>
         </div>
-		<?php /*
-			$servername = "wjuphysicaltherapy.com";
-			$username = "wjuphysi_chafo";
-			$password = "physical2015";
-			$dbname = "wjuphysi_syllabus";
-			
-			//Create Connection
-			$conn = new mysqli($servername, $username, $password, $dbname);
-			//Check Connection
-			if($conn->connect_error){
-				die("Connection failed: ".$conn->connect_error);
-			}
-			
-			$sql = "INSERT INTO `syllabus`(`course_number`, `course_title`, `contact_hours`, `credits`,
-			`description`, `schedule`, `location`, `faculty`, `office_hours`, `phone`, `email`, `academic_dishonesty_policy`,
-			`academic_integrity`, `attendance_policy`, `professional_behavior_exceptions`, `electronic_devices`, `examinations`,
-			`arc`, `disability_sevices`, `grading_policy`, `objectives`, `resources`, `taxonomy`)
-			VALUES (courseNumber,courseTitle,contactHours,credits,description,schedule,location,faculty,officeHours,phone,email,
-			null,null,null,null,null,null,null,null,null,objectives,null,null)"
-			
-			if($conn->multi_query($sql) == TRUE){
-				echo "New records created successfully";
-			}else{
-				echo "Error:".$sql."<br/>".$conn->error;
-			}
-			
-			$conn->close();*/
-		?>
-        <script>
-         function addObjective(){
-          var element = document.createElement("BUTTON");
+        <script type="text/javaScript">
+        function add(){
+        	/*<div class='col-md-2'><select id='Taxonomy' name='Taxonomy' class='form-control'><option value='' disabled selected>Taxonomy</option><option value='1'>1</option><option value='2'>2</option><option value='3'>3</option><option value='4'>4</option><option value='5'>5</option><option value='6'>6</option></select></div>*/
+			document.getElementById("addObjective").innerHTML += 
+			"<div class='form-group'><label class='col-md-4 control-label' for='objectives'></label><div class='col-md-6'><div class='input-append'><input id='objectives' name='objective[]' class='form-control input-md' placeholder='Objective' type='text'></div></div><div class='col-md-2'><select id='Taxonomy' name='taxonomy[]' class='form-control'><option value='' disabled selected>Taxonomy</option><option value='1'>1</option><option value='2'>2</option><option value='3'>3</option><option value='4'>4</option><option value='5'>5</option><option value='6'>6</option></select></div></div>";
+		}
 
-		//element.setAttribute("type", "text");
-		//element.setAttribute("value", "");
-		//element.setAttribute("name", "Test Name");
-		
-		//var foo = document.getElementById("objectivesDiv");
-		document.getElementById("objectivesDiv").appendChild(element);
-	}
-</script>
+		function addFaculty(){
+			document.getElementById("addFaculty").innerHTML += "<div class='form-group'><label class='col-md-4 control-label' for='faculty1'></label><div class='col-md-6'><input class='form-control input-md' id='faculty' name='faculty[]' placeholder='Enter a Faculty Member' type='text'></div></div>";
+		}
+	        //function addObjective(){
+	         //	document.getElementById('objectivesDiv').innerHTML += '<h1>Hello</h1>';
+	         //var element = document.createElement("BUTTON");
+
+			//element.setAttribute("type", "text");
+			//element.setAttribute("value", "");
+			//element.setAttribute("name", "Test Name");
+			
+			//var foo = document.getElementById("objectivesDiv");
+			//document.getElementById("objectivesDiv").appendChild(element);
+			//}
+		</script>
 <!-- /.container */-->
     <!-- Bootstrap core JavaScript
     ================================================== -->
