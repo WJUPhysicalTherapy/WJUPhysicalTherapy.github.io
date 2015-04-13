@@ -1,7 +1,7 @@
 <?php
 require_once('../../database/Database.php');
 
-$db = new Database('localhost', 'wjuphysi_chafo', 'physical2015', 'wjuphysi_profiles');
+$db = new Database('localhost', 'wjuphysi_chafo', 'physical2015', 'wjuphysi_syllabi');
 $fname = $_GET["first_name"];
 $lname = $_GET["last_name"];
 $email = $_GET["email"];
@@ -14,7 +14,7 @@ if($_GET["password"] === $_GET["cpassword"]){
 }
 //echo $name;
 if($fname || $lname || $email || $pmatch){
-  $db->update("UPDATE login SET first_name='$fname', last_name='$lname', email='$email' WHERE email ='nchaufournier140@cardinal.wju.edu';");
+  $db->update("UPDATE profiles SET first_name='$fname', last_name='$lname', email='$email' WHERE email ='nchaufournier140@cardinal.wju.edu';");
 }else{
   echo "No First Name";
 }

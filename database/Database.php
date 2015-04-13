@@ -65,7 +65,7 @@ class Database {
 
 	public function queryProfile($col, $where){
 		global $conn;
-		$sql = "SELECT ".$col." FROM login WHERE email ='".$where."';";
+		$sql = "SELECT ".$col." FROM profiles WHERE email ='".$where."';";
 		//echo $sql;
 		
 		if(!$conn){
@@ -93,6 +93,16 @@ class Database {
 			echo "Error updating Record: ".mysqli_error($conn);
 		}
 
+	}
+
+	public function isRecord($email, $password){
+		global $conn;
+		$sql = "SELECT email, password FROM login WHERE email='$email' AND password='$password';";
+		if(mysqli_query($conn, $sql)){
+			return TRUE;
+		}else{
+			return FALSE;
+		}
 	}
 	
 	public function insert($cn, $ct, $ch, $credits, $schedule_days){
