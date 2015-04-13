@@ -1,7 +1,7 @@
 <?php
 require_once('../database/Database.php');
 
-$db = new Database('localhost', 'wjuphysi_nic', 'physical2015', 'wjuphysi_syllabus');
+$db = new Database('localhost', 'wjuphysi_nic', 'physical2015', 'wjuphysi_syllabi');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -47,14 +47,13 @@ $db = new Database('localhost', 'wjuphysi_nic', 'physical2015', 'wjuphysi_syllab
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Dashboard</a></li>
+            <li><a href="#">Craig Ruby</a></li>
             <li><a href="#">Settings</a></li>
-            <li><a href="#">Profile</a></li>
             <li><a href="#">Help</a></li>
           </ul>
-          <form class="navbar-form navbar-right">
+          <!--<form class="navbar-form navbar-right">
             <input type="text" class="form-control" placeholder="Search...">
-          </form>
+          </form>-->
         </div>
       </div>
     </nav>
@@ -63,36 +62,13 @@ $db = new Database('localhost', 'wjuphysi_nic', 'physical2015', 'wjuphysi_syllab
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
           <ul class="nav nav-sidebar">
-            <li class="active"><a href="faculty.html">Overview <span class="sr-only">(current)</span></a></li>
+            <li class="active"><a href="faculty.php">Overview <span class="sr-only">(current)</span></a></li>
             <li><a href="documents.html">Documents</a></li>
-            <li><a href="#">Classes</a></li>
+            <li><a href="classes.html">Classes</a></li>
           </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
           <h1 class="page-header">Dashboard</h1>
-
-          <!--div class="row placeholders">
-            <div class="col-xs-6 col-sm-3 placeholder">
-              <img data-src="holder.js/200x200/auto/sky" class="img-responsive" alt="Generic placeholder thumbnail">
-              <h4>Label</h4>
-              <span class="text-muted">Something else</span>
-            </div>
-            <div class="col-xs-6 col-sm-3 placeholder">
-              <img data-src="holder.js/200x200/auto/vine" class="img-responsive" alt="Generic placeholder thumbnail">
-              <h4>Label</h4>
-              <span class="text-muted">Something else</span>
-            </div>
-            <div class="col-xs-6 col-sm-3 placeholder">
-              <img data-src="holder.js/200x200/auto/sky" class="img-responsive" alt="Generic placeholder thumbnail">
-              <h4>Label</h4>
-              <span class="text-muted">Something else</span>
-            </div>
-            <div class="col-xs-6 col-sm-3 placeholder">
-              <img data-src="holder.js/200x200/auto/vine" class="img-responsive" alt="Generic placeholder thumbnail">
-              <h4>Label</h4>
-              <span class="text-muted">Something else</span>
-            </div>
-          <div-->
 
           <h2 class="sub-header">Section title</h2>
           <div class="table-responsive">
@@ -107,7 +83,7 @@ $db = new Database('localhost', 'wjuphysi_nic', 'physical2015', 'wjuphysi_syllab
                 </tr>
               </thead>
               <tbody>
-              <?php $db->query("SELECT course_number, course_title, contact_hours, credits, schedule FROM syllabus");?>
+              <?php $db->query("SELECT course_number, course_title, contact_hours, credits, schedule_days FROM classes");?>
                 <!--tr>
                   <td>617</td>
                   <td>Service Learning I</td>
@@ -121,7 +97,7 @@ $db = new Database('localhost', 'wjuphysi_nic', 'physical2015', 'wjuphysi_syllab
                   <td>3</td>
                   <td>1</td>
                   <td>Fri</td>
-                </tr>-->
+                </tr>
                 <tr>
                   <td>1,003</td>
                   <td>Integer</td>
@@ -219,7 +195,7 @@ $db = new Database('localhost', 'wjuphysi_nic', 'physical2015', 'wjuphysi_syllab
                   <td>ligula</td>
                   <td>in</td>
                   <td>libero</td>
-                </tr>
+                </tr>-->
               </tbody>
             </table>
           </div>

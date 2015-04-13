@@ -7,3 +7,12 @@ body {
   padding: 40px 15px;
   text-align: center;
 }
+
+.starter-template:h1{
+	font-size:75px;
+	display:block;
+}
+
+p{
+	text-align:left;
+}

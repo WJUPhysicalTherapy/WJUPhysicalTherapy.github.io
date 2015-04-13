@@ -16,24 +16,26 @@
 <?php
 require_once('Database.php');
 
-$db = new Database('localhost', 'wjuphysi_nic', 'physical2015', 'wjuphysi_syllabus');
+$db = new Database('localhost', 'wjuphysi_nic', 'physical2015', 'wjuphysi_syllabi');
 ?>
 
 <table class='table table-striped'>
-	<?php $db->query("SELECT * FROM syllabus");?>
+	<?php $db->query("SELECT * FROM classes");?>
 </table>
 
 
 
-<?php $db->disconnect();?>
 <p id="addHere">Hello</p>
-<button onclick="addObjective()">Add</button>
+<input type="button" name="addDbItem" onclick="document.write('<?php $db->insert("888") ?>" value="Add">Add</button>
+
 
 <script type="text/javascript">
-	//function add(){
-	//	document.getElementById("addHere").innerHTML += " <input placeholder='Type here' class='form-control input-md'>it kinda works";
-	//}
-</script>
 
+
+	function add(){
+		document.getElementById("addHere").innerHTML += " <input placeholder='Type here' class='form-control input-md'>it kinda works";
+	}
+</script>
+<?php $db->disconnect();?>
 </body>
 </html>

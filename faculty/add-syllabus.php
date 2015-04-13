@@ -1,4 +1,9 @@
 <?php
+//Database code
+require_once('../database/Database.php');
+$db = new Database('localhost', 'wjuphysi_nic', 'physical2015', 'wjuphysi_syllabi');
+
+
 //define variables and set to empty values
 $courseNumberErr = $courseTitleErr = $contactHoursErr = $creditsErr = $descriptionErr = $scheduleErr = $facultyErr = "";
 $courseNumber = $courseTitle = $contactHours = $credits = $description = $schedule = $faculty = "";
@@ -9,6 +14,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	} else {
 		$courseNumber = test_input($POST["courseNumber"]);
 	}
+}
+
+if(isset($_POST['syllabusFormSubmit'])){
+	$db->insert();
 }
 ?>
 
@@ -88,7 +97,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <div class="col-sm-3 col-md-2 sidebar">
           <ul class="nav nav-sidebar">
             <li>
-              <a href="faculty.html">Overview</a>
+              <a href="faculty.php">Overview</a>
             </li>
 
 
@@ -99,7 +108,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
               <li>
-                <a href="#">Classes</a>
+                <a href="classes.html">Classes</a>
               </li>
             </ul>
           </div>
@@ -164,7 +173,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                       "description">Description</label>
 
                       <div class="col-md-6">
-                        <textarea id="description" name="description"></textarea>
+                        <textarea id="description" name="description" cols="56" rows="5"></textarea>
                       </div>
                     </div>
                     <!-- Multiple Checkboxes (inline) -->
@@ -177,25 +186,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                       <div class="col-md-6">
                         <label class="checkbox-inline" for=
                         "schedule-0"><input id="schedule-0" name="schedule[]"
-                        type="checkbox" value="Monday"> Monday</label>
+                        type="checkbox" value="monday"> Monday</label>
                         <label class="checkbox-inline" for=
                         "schedule-1"><input id="schedule-1" name="schedule[]"
-                        type="checkbox" value="Tuesday"> Tuesday</label>
+                        type="checkbox" value="tuesday"> Tuesday</label>
                         <label class="checkbox-inline" for=
                         "schedule-2"><input id="schedule-2" name="schedule[]"
-                        type="checkbox" value="Wednesday">
+                        type="checkbox" value="wednesday">
                         Wednesday</label> <label class="checkbox-inline"
                         for="schedule-3"><input id="schedule-3" name=
-                        "schedule[]" type="checkbox" value="Thursday">
+                        "schedule[]" type="checkbox" value="thursday">
                         Thursday</label> <label class="checkbox-inline"
                         for="schedule-4"><input id="schedule-4" name=
-                        "schedule[]" type="checkbox" value="Friday">
+                        "schedule[]" type="checkbox" value="friday">
                         Friday</label> <label class="checkbox-inline" for=
                         "schedule-5"><input id="schedule-5" name="schedule[]"
-                        type="checkbox" value="Saturday"> Saturday</label>
+                        type="checkbox" value="saturday"> Saturday</label>
                         <label class="checkbox-inline" for=
                         "schedule-6"><input id="schedule-6" name="schedule[]"
-                        type="checkbox" value="Sunday"> Sunday</label>
+                        type="checkbox" value="sunday"> Sunday</label>
                       </div>
                     </div>
                     <!-- Text input-->
@@ -391,7 +400,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </div>
               </fieldset>
 				<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2">
+				<div class="form-group">
+                      <label class="col-md-4 control-label" for="addObjective"></label>
 					<button type="submit" name="syllabusFormSubmit" class="btn btn-default">Submit</button>
+					</div>
+					</div>
 				</div>
             </form>
 
@@ -405,7 +418,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
         <script type="text/javaScript">
         function add(){
-        	/*<div class='col-md-2'><select id='Taxonomy' name='Taxonomy' class='form-control'><option value='' disabled selected>Taxonomy</option><option value='1'>1</option><option value='2'>2</option><option value='3'>3</option><option value='4'>4</option><option value='5'>5</option><option value='6'>6</option></select></div>*/
+        	/**/
 			document.getElementById("addObjective").innerHTML += 
 			"<div class='form-group'><label class='col-md-4 control-label' for='objectives'></label><div class='col-md-6'><div class='input-append'><input id='objectives' name='objective[]' class='form-control input-md' placeholder='Objective' type='text'></div></div><div class='col-md-2'><select id='Taxonomy' name='taxonomy[]' class='form-control'><option value='' disabled selected>Taxonomy</option><option value='1'>1</option><option value='2'>2</option><option value='3'>3</option><option value='4'>4</option><option value='5'>5</option><option value='6'>6</option></select></div></div>";
 		}
@@ -413,18 +426,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		function addFaculty(){
 			document.getElementById("addFaculty").innerHTML += "<div class='form-group'><label class='col-md-4 control-label' for='faculty1'></label><div class='col-md-6'><input class='form-control input-md' id='faculty' name='faculty[]' placeholder='Enter a Faculty Member' type='text'></div></div>";
 		}
-	        //function addObjective(){
-	         //	document.getElementById('objectivesDiv').innerHTML += '<h1>Hello</h1>';
-	         //var element = document.createElement("BUTTON");
-
-			//element.setAttribute("type", "text");
-			//element.setAttribute("value", "");
-			//element.setAttribute("name", "Test Name");
-			
-			//var foo = document.getElementById("objectivesDiv");
-			//document.getElementById("objectivesDiv").appendChild(element);
-			//}
 		</script>
+		<?php $db->disconnect();?>
 <!-- /.container */-->
     <!-- Bootstrap core JavaScript
     ================================================== -->

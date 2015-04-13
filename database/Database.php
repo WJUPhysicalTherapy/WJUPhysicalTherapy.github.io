@@ -8,7 +8,7 @@ class Database {
 		if(!$conn){
 			die("Connection Failed: ".mysqli_connect_error());
 		}
-		echo "Connected Successfully<br/>";
+		//echo "Connected Successfully<br/>";
 	}
 	
 	public function disconnect() {
@@ -34,7 +34,7 @@ class Database {
 						  <td>".$row["course_title"]."</td>
 						  <td>".$row["contact_hours"]."</td>
 						  <td>".$row["credits"]."</td>
-						  <td>".$row["schedule"]."</td>
+						  <td>".$row["schedule_days"]."</td>
 					  </tr>";
 			}
 		} else {
@@ -42,14 +42,22 @@ class Database {
 		}
 	}
 	
-	public function numRows() {
-		return $this->_numRows;
+	public function insert($cn, $ct, $ch, $credits, $schedule_days){
+		global $conn;
+		
+		$sql = "INSERT INTO classes(course_number, course_title, contact_hours, credits, schedule_days)
+				VALUES('".$cn."', '".$ct."', '".$ch."', '".$credits."', '".$schedule_days."');";
+		if($cn == "" || $ct == "" || $ch == "" || $credits == ""){
+			echo "Not Added";
+		}else if(mysqli_query($conn, $sql)){
+			//echo "<script type='text/javascript'>alert('New record created');</script>";
+		}else{
+			echo mysqli_error($conn);
+		}
 	}
 	
-	public function rows(){
-		//PHP for Absolute Beginners
-		//Video Lecture 52: MySQL Database Example Part 3
-		
+	public function numRows() {
+		return $this->_numRows;
 	}
 }
 ?>
