@@ -16,3 +16,17 @@ body {
 p{
 	text-align:left;
 }
+
+.file_button_container,
+.file_button_container input {
+   height: 47px;
+   width: 263px;
+}
+
+.file_button_container {
+   background: transparent;
+}
+
+.file_button_container input {
+   opacity: 0;
+}

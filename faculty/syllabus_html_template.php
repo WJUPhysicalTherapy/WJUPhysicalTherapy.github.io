@@ -9,7 +9,8 @@ foreach ($schedule as $day => $n) {
 	$schedule_days += $schedule[$day].", ";
 }
 //$cn, $ct, $ch, $credits, $schedule_days
-$db->insert($_POST["courseNumber"], $_POST["courseTitle"], $_POST["contactHours"], $_POST["credits"], $_POST["schedule"]);
+$db->insert($_POST["courseNumber"], $_POST["courseTitle"], $_POST["contactHours"], $_POST["credits"], $_POST["schedule"], $tax);
+echo $tax;
 ?>
 
 <html>
@@ -268,9 +269,12 @@ $db->insert($_POST["courseNumber"], $_POST["courseTitle"], $_POST["contactHours"
 						<?php
 							$objective = $_POST["objective"];
 							$taxonomy = $_POST["taxonomy"];
+							$tax ="";
 							for ($x =0; $x < sizeof($objective); $x++) {
 								echo "<li>".$objective[$x]." (".$taxonomy[$x]."*)</li>";
+								$tax += $taxonomy[$x];
 							} 
+							echo $tax;
 						?>
 						<!--<li>To identify attributes of his or her own culture and cultural practices; (2*)</li>
 						<li>Examine the organizational structure of an organization and its purpose both internally and externally. (1*)</li>

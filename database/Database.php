@@ -34,6 +34,7 @@ class Database {
 						  <td>".$row["contact_hours"]."</td>
 						  <td>".$row["credits"]."</td>
 						  <td>".$row["schedule_days"]."</td>
+						  <td>".$row["taxonomy"]."</td>
 					  </tr>";
 			}
 		} else {

@@ -1,0 +1,6 @@
+AddHandler application/x-httpd-php55 .php .php5 .php4 .php3
+Options -Indexes
+AuthName "Secure Area"
+AuthType Basic
+AuthUserFile /.htpasswds/.htpasswd
+require valid-user

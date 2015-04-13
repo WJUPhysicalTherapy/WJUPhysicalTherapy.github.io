@@ -13,7 +13,7 @@
 
     <!-- Bootstrap core CSS -->
     <link href="../css/bootstrap.css" rel="stylesheet">
-
+	<link href="../css/starter-template.css" rel="stylesheet">
     <!-- Custom styles for this template -->
     <link href="../css/dashboard.css" rel="stylesheet">
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
@@ -42,7 +42,7 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Craig Ruby</a></li>
+            <li><a href="../faculty/profile/profile.php">Craig Ruby</a></li>
             <li><a href="#">Settings</a></li>
             <li><a href="#">Help</a></li>
           </ul>
@@ -69,8 +69,8 @@
   		<a href="classes/class1.html" class="list-group-item">Service Learning I</a>
   		<a href="classes/class2.html" class="list-group-item">Service Learning II</a>
 	</div>
-	<button type="button" class="btn btn-default btn-lg">
-		<span class="glyphicon glyphicon-upload" aria-hidden="true"></span> Upload New Document
+	<!--<button type="file" class="btn btn-default btn-lg">-->
+		<div class="file_button_container btn btn-default btn-lg"><span class="glyphicon glyphicon-upload" aria-hidden="true"></span>&nbsp;Upload New Document<input type="file" value="Upload New Document" /></div> 
 	</button>
 	<a href="add-syllabus.php"><button type="button" class="btn btn-default btn-lg">
 		<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Create New Syllabus

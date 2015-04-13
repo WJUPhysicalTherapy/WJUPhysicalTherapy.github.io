@@ -48,7 +48,7 @@ $db = new Database('localhost', 'wjuphysi_nic', 'physical2015', 'wjuphysi_syllab
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="/faculty/profile/profile.php?<?php echo $_POST['email']?>"><?php $db->queryProfile("last_name", $_POST["email"]);?></a></li>
+            <li><a href="/faculty/profile/profile.php?<?php echo $_POST['email']?>">Craig Ruby</a></li>
             <li><a href="#">Settings</a></li>
             <li><a href="#">Help</a></li>
           </ul>
@@ -81,10 +81,11 @@ $db = new Database('localhost', 'wjuphysi_nic', 'physical2015', 'wjuphysi_syllab
                   <th data-field="price" data-sortable="true">Contact Hours</th>
                   <th data-field="credits" data-sortable="true">Credits</th>
                   <th data-field="schedule" data-sortable="true">Days</th>
+				  <th data-field="taxonomy" data-sortable="true">Taxonomy</th>
                 </tr>
               </thead>
               <tbody>
-              <?php $db->query("SELECT course_number, course_title, contact_hours, credits, schedule_days FROM classes");?>
+              <?php $db->query("SELECT course_number, course_title, contact_hours, credits, schedule_days, taxonomy FROM classes");?>
                 
               </tbody>
             </table>

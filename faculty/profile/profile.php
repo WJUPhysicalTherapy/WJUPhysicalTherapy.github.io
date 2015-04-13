@@ -13,7 +13,7 @@ if($_GET["password"] === $_GET["cpassword"]){
   $pmatch = FALSE;
 }
 //echo $name;
-if($fname || $lname || $email || $pmatch){
+if(($fname != "") || ($lname != "") || ($email != "") || ($pmatch=== TRUE)){
   $db->update("UPDATE profiles SET first_name='$fname', last_name='$lname', email='$email' WHERE email ='nchaufournier140@cardinal.wju.edu';");
 }else{
   echo "No First Name";
