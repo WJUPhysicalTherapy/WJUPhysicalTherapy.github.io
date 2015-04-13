@@ -9,7 +9,8 @@ foreach ($schedule as $day => $n) {
 	$schedule_days += $schedule[$day].", ";
 }
 //$cn, $ct, $ch, $credits, $schedule_days
-$db->insert($_POST["courseNumber"], $_POST["courseTitle"], $_POST["contactHours"], $_POST["credits"], $_POST["schedule"]);
+//$_POST["courseNumber"], $_POST["courseTitle"], $_POST["contactHours"], $_POST["credits"], $_POST["schedule"]
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -38,7 +39,7 @@ $db->insert($_POST["courseNumber"], $_POST["courseTitle"], $_POST["contactHours"
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 	<style>
-		body{
+		.syl{
 			font-family: "Times New Roman", Times, serif; 
 			width: 750px;
 			padding:30px;
@@ -57,7 +58,6 @@ $db->insert($_POST["courseNumber"], $_POST["courseTitle"], $_POST["contactHours"
 		}
 
 		tr{
-			border: 1px solid green;
 			border-spacing: 3em;
 			padding-bottom:3em;
 		}
@@ -68,6 +68,12 @@ $db->insert($_POST["courseNumber"], $_POST["courseTitle"], $_POST["contactHours"
 		.title{
 			font-weight: bold;
 			text-transform: uppercase;
+			text-align: left;
+		}
+		.centerTitle{
+			font-weight: bold;
+			text-transform: uppercase;
+			text-align: center;
 		}
 
 
@@ -109,11 +115,11 @@ $db->insert($_POST["courseNumber"], $_POST["courseTitle"], $_POST["contactHours"
             <li><a href="../classes.html">Classes</a></li>
           </ul>
       </div>
-      <div class="starter-template">
-      <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+      <div>
+      <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main syl">
 
       
-       <div class="title" style="text-align:center">
+       <div class="centerTitle">
 			<h3>Wheeling Jesuit University</h3><br/>
 			<h3>Department of Physical Therapy</h3><br/>
 			
@@ -124,32 +130,32 @@ $db->insert($_POST["courseNumber"], $_POST["courseTitle"], $_POST["contactHours"
 		<table>
 			<tr>
 				<th>Course Number:</th>
-				<td><?php echo $_POST["courseNumber"]; ?></td>
+				<td><?php $db->querySingle("course_number", "617"); ?></td>
 			</tr>
 			<tr></tr>
 			<tr>
 				<th>Course Title:</th>
-				<td><?php echo $_POST["courseTitle"]; ?></td>
+				<td><?php $db->querySingle("course_title", "617"); ?></td>
 			</tr>
 			<tr></tr>
 			<tr>
 				<th>Contact Hours:</th>
-				<td><?php echo $_POST["contactHours"]; ?> hours per week</td>
+				<td><?php $db->querySingle("contact_hours", "617"); ?> hours per week</td>
 			</tr>
 			<tr></tr>
 			<tr>
 				<th>Credits:</th>
-				<td><?php echo $_POST["credits"]; ?></td>
+				<td><?php $db->querySingle("credits", "617"); ?></td>
 			</tr>
 			<tr class="spacer"><td>  </td></tr>
 			<tr>
 				<th>Description:</th>
-				<td><?php echo $_POST["description"]; ?></td>
+				<td><?php $db->querySingle("description", "617"); ?></td>
 			</tr>
 			<tr class="spacer"></tr>
 			<tr>
 				<th>Schedule:</th>
-				<td><?php $schedule_days;
+				<td><?php $db->querySingle("schedule_days", "617");
 				//$schedule = $_POST["schedule"];
 				//foreach ($schedule as $day => $n) {
 					//echo $schedule[$day].", ";
@@ -159,44 +165,45 @@ $db->insert($_POST["courseNumber"], $_POST["courseTitle"], $_POST["contactHours"
 			<tr></tr>
 			<tr>
 				<th>Location:</th>
-				<td><?php echo $_POST["location"]; ?></td>
+				<td><?php $db->querySingle("location", "617"); ?></td>
 			</tr>
 			<tr class="spacer"></tr>
 			<tr>
 				<th>Faculty:</th>
-				<td><?php
-				$faculty = $_POST["faculty"];
-				foreach ($faculty as $professor) {
-					echo $professor."<br />";
-				} ?></td>
+				<td><?php $db->querySingle("faculty", "617"); ?></td>
 			</tr>
 			<tr class="spacer"></tr>
 			<tr>
 				<th>Office Hours:</th>
-				<td><?php echo $_POST["office_hours_time"]; ?></td>
+				<td><?php $db->querySingle("office_hours", "617"); ?></td>
 			</tr>
 			<tr></tr>
 			<tr>
 				<th>Phone:</th>
-				<td><?php echo $_POST["phoneNumber"]; ?></td>
+				<td><?php $db->querySingle("phone", "617"); ?></td>
 			</tr>
 			<tr></tr>
 			<tr>
 				<th>E-Mail:</th>
-				<td><?php echo $_POST["email"]; ?></td>
+				<td><?php $db->querySingle("email", "617"); ?></td>
 			</tr>
 			<tr class="spacer"></tr>
 			<tr>
 				<th>Resources:</th>
-				<td><?php echo $_POST["resources"]; ?></td>
+				<td><?php $db->querySingle("resources", "617"); ?></td>
 			</tr>
 			<tr></tr>
 			</table>
 			<?php 
-				$items = $_POST["additionalItems"];
+				$itemQue = $db->querySingle("additionalItems", "617");
+				$items = explode(',', $itemQue);
+				for ($i=0; $i <count($items); $i++) { 
+					echo $items[0];
+				}
 				if(empty($items)){
-					echo "Nothing Here";
+					echo "Nothing Here I think";
 				}else{
+					echo "Something Here";
 					$n = count($items);
 
 					for($i=0; $i<$n; $i++){
@@ -276,41 +283,41 @@ $db->insert($_POST["courseNumber"], $_POST["courseTitle"], $_POST["contactHours"
 						}
 						if($items[$j] == 'g'){
 							echo "<p><span class='title'>Academic Resource Center (ARC):</span></p>
-				<p>
-				The Academic Resource Center or ARC, located on the ground floor of Ignatius Hall, is a place where students who
-				want to succeed can find professional and caring staff who are willing to listen to their ideas and who provide effective
-				strategies to tackle academic tasks.  Assistance is available through one-on-one tutoring instruction, study groups, or
-				instructional computer software.  The academic support services at the ARC are available to all Wheeling Jesuit University
-				students at no charge.  The ARC serves as an extension of the classroom where learning continues in a collaborative environment.
-				 Students need to come to ARC appointments prepared with textbooks, notes, and assignments to discuss study strategies and listen 
-				 to suggestions made by the tutors. The ARC encourages students to take responsibility for their own academic achievement and become successful, life-long learners.
-				</p><p>
-				Students may call the ARC at 304-243-4473 or stop in to set up an appointment with a writing tutor, math tutor, subject tutor,
-				or individual professional staff member for assistance with study skills, time management, or strategies to deal with learning
-				disabilities. Tutors are scheduled for a variety of core courses on a regular basis throughout the academic year.  Students are
-				invited to explore the ARC computer lab, which includes Internet access, computer applications, and self-paced instructional 
-				software. The ARC also offers a quiet, comfortable, and effective study environment for students. 
-				</p>
-				<p>
-				The ARC is open 51 hours per week during the fall and spring semesters.  The hours of operation are Monday, Tuesday, Wednesday, 
-				and Thursday from 10:00 a.m. – 9:00 p.m., Friday from 10:00 a.m. – 2:00 p.m., and Sunday from 6:00 p.m. – 9:00 p.m.  Visit the 
-				ARC website at www.wju.edu/arc to learn more about what the ARC has to offer.  Contact the ARC via e-mail at arc@wju.edu or FAX at 304-243-4457.
-				</p>";
+									<p>
+									The Academic Resource Center or ARC, located on the ground floor of Ignatius Hall, is a place where students who
+									want to succeed can find professional and caring staff who are willing to listen to their ideas and who provide effective
+									strategies to tackle academic tasks.  Assistance is available through one-on-one tutoring instruction, study groups, or
+									instructional computer software.  The academic support services at the ARC are available to all Wheeling Jesuit University
+									students at no charge.  The ARC serves as an extension of the classroom where learning continues in a collaborative environment.
+									 Students need to come to ARC appointments prepared with textbooks, notes, and assignments to discuss study strategies and listen 
+									 to suggestions made by the tutors. The ARC encourages students to take responsibility for their own academic achievement and become successful, life-long learners.
+									</p><p>
+									Students may call the ARC at 304-243-4473 or stop in to set up an appointment with a writing tutor, math tutor, subject tutor,
+									or individual professional staff member for assistance with study skills, time management, or strategies to deal with learning
+									disabilities. Tutors are scheduled for a variety of core courses on a regular basis throughout the academic year.  Students are
+									invited to explore the ARC computer lab, which includes Internet access, computer applications, and self-paced instructional 
+									software. The ARC also offers a quiet, comfortable, and effective study environment for students. 
+									</p>
+									<p>
+									The ARC is open 51 hours per week during the fall and spring semesters.  The hours of operation are Monday, Tuesday, Wednesday, 
+									and Thursday from 10:00 a.m. – 9:00 p.m., Friday from 10:00 a.m. – 2:00 p.m., and Sunday from 6:00 p.m. – 9:00 p.m.  Visit the 
+									ARC website at www.wju.edu/arc to learn more about what the ARC has to offer.  Contact the ARC via e-mail at arc@wju.edu or FAX at 304-243-4457.
+									</p>";
 						}
 						if($items[$j] == 'h'){
 							echo "<p><span class='title'>Disability Services:</span>
-					Wheeling Jesuit University encourages faculty, staff and administration to assist students with disabilities in achieving academic success.  The University offers students with documented disabilities reasonable accommodations on a case-by-case basis with confidentiality in compliance with the Americans with Disabilities Act and Section 504 of the Rehabilitation Act of 1973.  Students with special academic needs due to physical or learning disabilities should contact the Disability Services Director at 304-243-4484.   Disability Services are coordinated through the Academic Resource Center (ARC) located in G 24 on the ground floor of Ignatius Hall.  A learning disabilities specialist is available at the ARC to provide assistance with time management, study skills, or strategies that specifically address learning disability issues.
-				</p>
-				<p>
-					In order to receive assistance, students must disclose their disability to the university, provide current and comprehensive documentation concerning the nature and extent of the disability, and communicate their specific needs to the Disability Services Director.  Wheeling Jesuit University is committed to providing reasonable accommodations to students with disabilities; however, it is the responsibility of these students to seek out available assistance on campus and to utilize individualized adjustments.  Ultimately, all students are responsible for their own academic achievement.  They must attend classes, complete course assignments and fulfill all university requirements for their chosen field of study.
-					</p>";
-						}
+										Wheeling Jesuit University encourages faculty, staff and administration to assist students with disabilities in achieving academic success.  The University offers students with documented disabilities reasonable accommodations on a case-by-case basis with confidentiality in compliance with the Americans with Disabilities Act and Section 504 of the Rehabilitation Act of 1973.  Students with special academic needs due to physical or learning disabilities should contact the Disability Services Director at 304-243-4484.   Disability Services are coordinated through the Academic Resource Center (ARC) located in G 24 on the ground floor of Ignatius Hall.  A learning disabilities specialist is available at the ARC to provide assistance with time management, study skills, or strategies that specifically address learning disability issues.
+									</p>
+									<p>
+										In order to receive assistance, students must disclose their disability to the university, provide current and comprehensive documentation concerning the nature and extent of the disability, and communicate their specific needs to the Disability Services Director.  Wheeling Jesuit University is committed to providing reasonable accommodations to students with disabilities; however, it is the responsibility of these students to seek out available assistance on campus and to utilize individualized adjustments.  Ultimately, all students are responsible for their own academic achievement.  They must attend classes, complete course assignments and fulfill all university requirements for their chosen field of study.
+										</p>";
+							}
 						if($items[$j] == 'i'){
 							echo "<p><span class='title'>Grading Policy:</span>
-				This is a pass/fail course.  Attendance at each assignment and completion of tasks as assigned is required for successful completion of this course.
-					<br/>1. Paper on the reading:  Drnach, M., Developing Cultural Awareness.  
-					<br/>2. Self reflection for each site on what you learned to be placed in your portfolio in the section on service. 
-				</p>";
+								This is a pass/fail course.  Attendance at each assignment and completion of tasks as assigned is required for successful completion of this course.
+									<br/>1. Paper on the reading:  Drnach, M., Developing Cultural Awareness.  
+									<br/>2. Self reflection for each site on what you learned to be placed in your portfolio in the section on service. 
+								</p>";
 						}
 				}
 					
@@ -326,12 +333,12 @@ $db->insert($_POST["courseNumber"], $_POST["courseTitle"], $_POST["contactHours"
 				
 				<p><span class="title">Objectives:</span>The student will be able to:
 					<ol>
-						<?php
-							$objective = $_POST["objective"];
-							$taxonomy = $_POST["taxonomy"];
-							for ($x =0; $x < sizeof($objective); $x++) {
-								echo "<li>".$objective[$x]." (".$taxonomy[$x]."*)</li>";
-							} 
+						<?php $db->querySingle("objectives", "617");
+							//$objective = $_POST["objective"];
+							//$taxonomy = $_POST["taxonomy"];
+							//for ($x =0; $x < sizeof($objective); $x++) {
+						//		echo "<li>".$objective[$x]." (".$taxonomy[$x]."*)</li>";
+						//	} 
 						?>
 						<!--<li>To identify attributes of his or her own culture and cultural practices; (2*)</li>
 						<li>Examine the organizational structure of an organization and its purpose both internally and externally. (1*)</li>

@@ -20,7 +20,6 @@ class Database {
 		//echo $sql;
 		
 		if(!$conn){
-			echo $sql."hello";
 			echo "Boo No Connection!";
 		}
 		//$sql = "SELECT course_title FROM classes"
@@ -40,6 +39,60 @@ class Database {
 		} else {
 			echo "0 results";
 		}
+	}
+
+	public function querySingle($col, $where){
+		global $conn;
+		$sql = "SELECT ".$col." FROM classes WHERE course_number ='".$where."';";
+		//echo $sql;
+		
+		if(!$conn){
+			echo "Boo No Connection!";
+		}
+		//$sql = "SELECT course_title FROM classes"
+		$result = mysqli_query($conn, $sql);
+		//echo $conn;
+		if(mysqli_num_rows($result) > 0){
+			//output data of each row
+			while($row = mysqli_fetch_assoc($result)){
+				echo $row[$col];
+			}
+		} else {
+			echo "0 results";
+		}
+		return $row = mysqli_fetch_assoc($result);
+	}
+
+	public function queryProfile($col, $where){
+		global $conn;
+		$sql = "SELECT ".$col." FROM login WHERE email ='".$where."';";
+		//echo $sql;
+		
+		if(!$conn){
+			echo "Boo No Connection!";
+		}
+		//$sql = "SELECT course_title FROM classes"
+		$result = mysqli_query($conn, $sql);
+		//echo $conn;
+		if(mysqli_num_rows($result) > 0){
+			//output data of each row
+			while($row = mysqli_fetch_assoc($result)){
+				echo $row[$col];
+			}
+		} else {
+			echo "0 results";
+		}
+		//return $row = mysqli_fetch_assoc($result);
+	}
+
+	public function update($sql){
+		global $conn;
+		if(mysqli_query($conn, $sql)){
+			echo "Record Updated Successfully";
+		}else {
+			echo "Error updating Record: ".mysqli_error($conn);
+		}
+
 	}
 	
 	public function insert($cn, $ct, $ch, $credits, $schedule_days){
