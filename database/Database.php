@@ -66,7 +66,7 @@ class Database {
 
 	public function queryProfile($col, $where){
 		global $conn;
-		$sql = "SELECT ".$col." FROM profiles WHERE email ='".$where."';";
+		$sql = "SELECT ".$col." FROM profiles WHERE id ='".$where."';";
 		//echo $sql;
 		
 		if(!$conn){
@@ -86,14 +86,20 @@ class Database {
 		//return $row = mysqli_fetch_assoc($result);
 	}
 
-	public function update($sql){
+	public function update($table, $items, $where){
 		global $conn;
+		$sql = "UPDATE ".$table." SET ".$items." WHERE ".$where.";";
 		if(mysqli_query($conn, $sql)){
-			echo "Record Updated Successfully";
+			//echo "$sql";
 		}else {
-			echo "Error updating Record: ".mysqli_error($conn);
+			echo "Error updating Record: ".mysqli_error($conn)."<br/>";
+			echo "$sql";
 		}
 
+	}
+
+	public function isDifferent(){
+		global $conn;
 	}
 
 	public function isRecord($email, $password){

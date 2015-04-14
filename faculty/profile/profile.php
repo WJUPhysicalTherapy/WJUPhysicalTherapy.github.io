@@ -2,21 +2,33 @@
 require_once('../../database/Database.php');
 
 $db = new Database('localhost', 'wjuphysi_chafo', 'physical2015', 'wjuphysi_syllabi');
-$fname = $_GET["first_name"];
-$lname = $_GET["last_name"];
-$email = $_GET["email"];
-$pword = $_GET["password"];
+$fname = $_POST["first_name"];
+$lname = $_POST["last_name"];
+$email = $_POST["email"];
+$username = $_POST["username"];
+$pword = $_POST["password"];
 $pmatch = TRUE;
-if($_GET["password"] === $_GET["cpassword"]){
+if($_POST["password"] === $_POST["cpassword"]){
   $pmatch = TRUE;
 }else{
   $pmatch = FALSE;
 }
+
 //echo $name;
-if(($fname != "") || ($lname != "") || ($email != "") || ($pmatch=== TRUE)){
-  $db->update("UPDATE profiles SET first_name='$fname', last_name='$lname', email='$email' WHERE email ='nchaufournier140@cardinal.wju.edu';");
-}else{
-  echo "No First Name";
+if($fname != ""){
+  $db->update("profiles", "first_name='".$fname."'"," id = 1");
+}
+if($lname != ""){
+  $db->update("profiles", "last_name='".$lname."'"," id = 1");
+}
+if($email != ""){
+  $db->update("profiles", "email='".$email."'"," id = 1");
+}
+if($username != ""){
+  $db->update("profiles", "username='".$username."'"," id = 1");
+}
+if($pword != "" && $pmatch != false){
+  $db->update("profiles", "password='".$pword."'"," id = 1");
 }
 
 ?>
@@ -61,7 +73,7 @@ if(($fname != "") || ($lname != "") || ($email != "") || ($pmatch=== TRUE)){
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="profile.php"><?php $db->queryProfile("first_name", "nchaufournier140@cardinal.wju.edu");?></a></li>
+            <li><a href="profile.php"><?php $db->queryProfile("first_name", "1");echo " "; $db->queryProfile("last_name", "1");?></a></li>
             <li><a href="#">Settings</a></li>
             <li><a href="#">Help</a></li>
           </ul>
@@ -78,13 +90,13 @@ if(($fname != "") || ($lname != "") || ($email != "") || ($pmatch=== TRUE)){
       <!-- left column -->
       <div class="col-md-3">
         <div class="text-center">
-          <img src="//placehold.it/100" class="avatar img-circle" alt="avatar">
+          <img src="../../images/wju-crest.jpg" class="avatar img-circle" alt="avatar">
           <h6>Upload a different photo...</h6>
           
           <input type="file" class="form-control">
         </div>
         <div class="text-center">
-        Date Joined: <?php $db->queryProfile("date_joined", "nchaufournier140@cardinal.wju.edu");?>
+        Date Joined: <?php $db->queryProfile("date_joined", "1");?>
         </div>
       </div>
 
@@ -98,23 +110,23 @@ if(($fname != "") || ($lname != "") || ($email != "") || ($pmatch=== TRUE)){
         </div>-->
         <h3>Personal info</h3>
         
-        <form class="form-horizontal" method="put" role="form" action="profile.php">
+        <form class="form-horizontal" method="post" role="form" action="profile.php">
           <div class="form-group">
             <label class="col-lg-3 control-label">First name:</label>
             <div class="col-lg-8">
-              <input class="form-control" type="text" name="first_name" value="<?php $db->queryProfile("first_name", "nchaufournier140@cardinal.wju.edu");?>">
+              <input class="form-control" type="text" name="first_name" value="<?php $db->queryProfile("first_name", "1");?>">
             </div>
           </div>
           <div class="form-group">
             <label class="col-lg-3 control-label">Last name:</label>
             <div class="col-lg-8">
-              <input class="form-control" name="last_name" type="text" value="<?php $db->queryProfile("last_name", "nchaufournier140@cardinal.wju.edu");?>">
+              <input class="form-control" name="last_name" type="text" value="<?php $db->queryProfile("last_name", "1");?>">
             </div>
           </div>
           <div class="form-group">
             <label class="col-lg-3 control-label">Email:</label>
             <div class="col-lg-8">
-              <input class="form-control" name="email" type="text" value="<?php $db->queryProfile("email", "nchaufournier140@cardinal.wju.edu");?>">
+              <input class="form-control" name="email" type="text" value="<?php $db->queryProfile("email", "1");?>">
             </div>
           </div>
           <!--<div class="form-group">
@@ -137,19 +149,19 @@ if(($fname != "") || ($lname != "") || ($email != "") || ($pmatch=== TRUE)){
           <div class="form-group">
             <label class="col-md-3 control-label">Username:</label>
             <div class="col-md-8">
-              <input class="form-control" name="username" type="text" value="<?php $db->queryProfile("username", "nchaufournier140@cardinal.wju.edu");?>">
+              <input class="form-control" name="username" type="text" value="<?php $db->queryProfile("username", "1");?>">
             </div>
           </div>
           <div class="form-group">
             <label class="col-md-3 control-label">Password:</label>
             <div class="col-md-8">
-              <input class="form-control" name="password" type="password" value="<?php $db->queryProfile("password", "nchaufournier140@cardinal.wju.edu");?>">
+              <input class="form-control" name="password" type="password" value="<?php $db->queryProfile("password", "1");?>">
             </div>
           </div>
           <div class="form-group">
             <label class="col-md-3 control-label">Confirm password:</label>
             <div class="col-md-8">
-              <input class="form-control" name="cpassword" type="password" value="<?php $db->queryProfile("password", "nchaufournier140@cardinal.wju.edu");?>">
+              <input class="form-control" name="cpassword" type="password" value="<?php $db->queryProfile("password", "1");?>">
             </div>
           </div>
           <div class="form-group">

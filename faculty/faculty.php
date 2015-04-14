@@ -14,7 +14,7 @@ $db = new Database('localhost', 'wjuphysi_nic', 'physical2015', 'wjuphysi_syllab
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
-    <title>Dashboard Template for Bootstrap</title>
+    <title>Dashboard</title>
 
     <!-- Bootstrap core CSS -->
     <link href="../css/bootstrap.css" rel="stylesheet">
@@ -71,7 +71,7 @@ $db = new Database('localhost', 'wjuphysi_nic', 'physical2015', 'wjuphysi_syllab
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
           <h1 class="page-header">Dashboard</h1>
 
-          <h2 class="sub-header">Section title</h2>
+          <h2 class="sub-header">Classes</h2>
           <div class="table-responsive">
             <table data-url="../database/data1.json"class="table table-striped" data-sort-name="name" data-sort-order="desc">
               <thead>
