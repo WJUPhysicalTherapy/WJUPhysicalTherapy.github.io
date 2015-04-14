@@ -119,7 +119,7 @@ if(isset($_POST['syllabusFormSubmit'])){
 				  <label class="col-md-4 control-label" for="courseNumber">Course Number:</label>  
 				  <div class="col-md-6">
 				  <input id="courseNumber" name="courseNumber" type="number" 
-				  placeholder="Enter Course Number" class="form-control input-md" >
+				  placeholder="Enter Course Number" class="form-control input-md" required>
 					
 				  </div>
 				</div>
