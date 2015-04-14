@@ -56,7 +56,8 @@ class Database {
 		if(mysqli_num_rows($result) > 0){
 			//output data of each row
 			while($row = mysqli_fetch_assoc($result)){
-				echo $row[$col];
+				//echo $row[$col];
+				return $row[$col];
 			}
 		} else {
 			echo "0 results";

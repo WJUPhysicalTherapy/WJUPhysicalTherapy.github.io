@@ -3,12 +3,8 @@ require_once('../../database/Database.php');
 
 $db = new Database('localhost', 'wjuphysi_nic', 'physical2015', 'wjuphysi_syllabi');
 
-$schedule_days = "";
-$schedule = $_POST["schedule"];
 $class = $_POST["classNumber"];
-foreach ($schedule as $day => $n) {
-	$schedule_days += $schedule[$day].", ";
-}
+
 //$cn, $ct, $ch, $credits, $schedule_days
 //$_POST["courseNumber"], $_POST["courseTitle"], $_POST["contactHours"], $_POST["credits"], $_POST["schedule"]
 
@@ -114,7 +110,7 @@ foreach ($schedule as $day => $n) {
 	  <div class="col-sm-3 col-md-2 sidebar">
           <ul class="nav nav-sidebar">
             <li><a href="../faculty.php">Overview</a></li>
-            <li class="active"><a href="../documents.html">Documents <span class="sr-only">(current)</span></a></li>
+            <li class="active"><a href="../documents.php">Documents <span class="sr-only">(current)</span></a></li>
             <li><a href="../classes.html">Classes</a></li>
           </ul>
       </div>
@@ -131,34 +127,45 @@ foreach ($schedule as $day => $n) {
 			<h3>Fall 2014 - Class 2016</h3><br/>
 		</div>
 		<table>
+		<tr class="spacer"></tr>
 			<tr>
 				<th>Course Number:</th>
-				<td>DPT <?php $db->querySingle("course_number", $class); ?></td>
+				<td>DPT <?php echo $db->querySingle("course_number", $class); ?></td>
 			</tr>
 			<tr></tr>
 			<tr>
 				<th>Course Title:</th>
-				<td><?php $db->querySingle("course_title", $class); ?></td>
+				<td><?php echo $db->querySingle("course_title", $class); ?></td>
 			</tr>
 			<tr></tr>
-			<tr>
-				<th>Contact Hours:</th>
-				<td><?php $db->querySingle("contact_hours", $class); ?> hours per week</td>
+			<tr><?php 
+					if(null !== ($db->querySingle("contact_hours", $class))){
+						echo "<th>Contact Hours:</th>";
+						echo "<td>";
+						echo $db->querySingle("contact_hours", $class); 
+						echo" hours per week</td>";
+					}
+				?>
 			</tr>
 			<tr></tr>
 			<tr>
 				<th>Credits:</th>
-				<td><?php $db->querySingle("credits", $class); ?></td>
+				<td><?php echo $db->querySingle("credits", $class); ?></td>
 			</tr>
 			<tr class="spacer"><td>  </td></tr>
-			<tr>
-				<th>Description:</th>
-				<td><?php $db->querySingle("description", $class); ?></td>
+			<tr><?php 
+					if(null !== ($db->querySingle("description", $class))){
+						echo "<th>Description:</th>";
+						echo "<td>";
+						echo $db->querySingle("description", $class); 
+						echo "</td>";
+					}
+					?>
 			</tr>
 			<tr class="spacer"></tr>
 			<tr>
 				<th>Schedule:</th>
-				<td><?php $db->querySingle("schedule_days", $class);
+				<td><?php echo $db->querySingle("schedule_days", $class);
 				//$schedule = $_POST["schedule"];
 				//foreach ($schedule as $day => $n) {
 					//echo $schedule[$day].", ";
@@ -166,34 +173,68 @@ foreach ($schedule as $day => $n) {
 				</td>
 			</tr>
 			<tr></tr>
-			<tr>
-				<th>Location:</th>
-				<td><?php $db->querySingle("location", $class); ?></td>
+			<tr><?php 
+					if(null !== ($db->querySingle("location", $class))){
+						echo "<th>Location:</th>";
+						echo "<td>";
+						echo $db->querySingle("location", $class); 
+						echo "</td>";
+					}
+					?>
 			</tr>
 			<tr class="spacer"></tr>
 			<tr>
-				<th>Faculty:</th>
-				<td><?php $db->querySingle("faculty", $class); ?></td>
+			<?php 
+					if(null !== ($db->querySingle("faculty", $class))){
+						echo "<th>Faculty:</th>";
+						echo "<td>";
+						echo $db->querySingle("faculty", $class); 
+						echo "</td>";
+					}
+					?>
 			</tr>
 			<tr class="spacer"></tr>
 			<tr>
-				<th>Office Hours:</th>
-				<td><?php $db->querySingle("office_hours", $class); ?></td>
+				<?php 
+					if(null !== ($db->querySingle("office_hours", $class))){
+						echo "<th>Office Hours:</th>";
+						echo "<td>";
+						echo $db->querySingle("office_hours", $class);
+						echo "</td>";
+					}
+				?>
 			</tr>
 			<tr></tr>
 			<tr>
-				<th>Phone:</th>
-				<td><?php $db->querySingle("phone", $class); ?></td>
+			<?php 
+					if(null !== ($db->querySingle("phone", $class))){
+						echo "<th>Phone:</th>";
+						echo "<td>";
+						echo $db->querySingle("phone", $class); 
+						echo "</td>";
+					}
+					?>
 			</tr>
 			<tr></tr>
-			<tr>
-				<th>E-Mail:</th>
-				<td><?php $db->querySingle("email", $class); ?></td>
+			<tr><?php 
+					if(null !== ($db->querySingle("email", $class))){
+						echo "<th>Email:</th>";
+						echo "<td>";
+						echo $db->querySingle("email", $class); 
+						echo "</td>";
+					}
+					?>
 			</tr>
 			<tr class="spacer"></tr>
 			<tr>
-				<th>Resources:</th>
-				<td><?php $db->querySingle("resources", $class); ?></td>
+			<?php 
+					if(null !== ($db->querySingle("resources", $class))){
+						echo "<th>Resources:</th>";
+						echo "<td>";
+						echo $db->querySingle("resources", $class); 
+						echo "</td>";
+					}
+					?>
 			</tr>
 			<tr class="spacer"></tr>
 			</table>
@@ -320,34 +361,20 @@ foreach ($schedule as $day => $n) {
 					//}
 					
 				?>
-				
-				<p><span class="title">Objectives:</span>The student will be able to:
-					<ol>
-						<?php $obj = $db->queryArray("objectives", $class);
+				<?php 
+					if(null !== ($db->querySingle("objectives", $class))){
+						echo "<p><span class='title'>Objectives:</span>The student will be able to:";
+						echo "<ol>";
+						$obj = $db->queryArray("objectives", $class);
 							$objectives = explode(".", $obj);
 							//echo $obj;
 							for($i=0; $i<count($objectives)-1; $i++){
 								echo "<li>".$objectives[$i]."</li>";
 							}
-							//$objective = $_POST["objective"];
-							//$taxonomy = $_POST["taxonomy"];
-							//for ($x =0; $x < sizeof($objective); $x++) {
-						//		echo "<li>".$objective[$x]." (".$taxonomy[$x]."*)</li>";
-						//	} 
-						?>
-						<!--<li>To identify attributes of his or her own culture and cultural practices; (2*)</li>
-						<li>Examine the organizational structure of an organization and its purpose both internally and externally. (1*)</li>
-						<li>Develop an appreciation for professional, social and civic responsibility. (2*)</li>
-						<li>Acquire skills to become effective in advocacy. (2*)</li>
-						<li>Allow students to challenge assumptions, biases, and prejudices on social, cultural, racial, health, ethical and political issues. (2*)</li>
-						<li>Investigate local resources to assist with the identified health care needs of the clients served. (3*)</li>
-						<li>To introduce and explore leadership skills. (2*)</li>
-						<li>Examine the quality of the service delivery and the factors that influence the quality. (2*)</li>
-						<li>Allow students to develop skills in public education and consultation including, but not limited to the subjects of prevention, wellness and health promotion. (2*)</li>
-						<li>Apply basic physical therapy skills acquired during the didactic preparation in Term I. (3*)</li>
-					--></ol>
-				</p>
-				<p>*Major Categories in the Taxonomy of Educational Objectives (Bloom 1956)</p>
+						echo "</ol></p>";
+						echo "<p>*Major Categories in the Taxonomy of Educational Objectives (Bloom 1956)</p>";
+					}
+					?>
 				</div>
 				</div><!--End Print Div-->
       </div><!--End Centering Div-->

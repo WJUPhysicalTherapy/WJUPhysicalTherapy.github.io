@@ -50,6 +50,7 @@ if(isset($_POST['orderBy'])){
     <script type="text/css">
     .btn-link{
       color:#000000;
+	  font-weight: bold;
     }
     </script>
   </head>
@@ -94,23 +95,42 @@ if(isset($_POST['orderBy'])){
 
           <h2 class="sub-header">Classes</h2>
           <div class="table-responsive">
-		  
+		  <!--Seach Bar-->
+		  <form action="faculty-search.php" method="post">
+		  <div class="col-md-3 col-md-offset-3 pull-right">
+			<div class="input-group">
+			  <input name="search" type="text" class="form-control" placeholder="Search taxonomy...">
+			  <span class="input-group-btn">
+				<button class="btn btn-default" type="submit">Go!</button>
+			  </span>
+			</div><!-- /input-group -->
+		  </div><!-- /.col-lg-6 -->
+		  <!--End Search Bar-->
+		  </form>
             <table class="table table-striped table-hover" data-sort-name="name">
               <thead>
                 <tr>
-                <form method="post" action="faculty.php">
+                <form method="post" action="faculty-search.php">
                   <th data-field="id" data-sortable="true" class="sort"><button id="num" type="submit" name="orderBy" value="course_number" class="btn btn-link">#</th>
                   <th data-field="name" data-sortable="true"><button id="course" type="submit" name="orderBy" value="course_title" class="btn btn-link">Course Title</button></th>
                   <th data-field="price" data-sortable="true"><button id="contact" type="submit" name="orderBy" value="contact_hours" class="btn btn-link">Contact Hours</th>
                   <th data-field="credits" data-sortable="true"><button id="credits" type="submit" name="orderBy" value="credits" class="btn btn-link">Credits</th>
                   <th data-field="schedule" data-sortable="true"><button id="days" type="submit" name="orderBy" value="schedule_days" class="btn btn-link">Days</th>
-				          <th data-field="taxonomy" data-sortable="true"><button id="tax" type="submit" name="orderBy" value="taxonomy" class="btn btn-link">Taxonomy</th>
+				  <th data-field="taxonomy" data-sortable="true"><button id="tax" type="submit" name="orderBy" value="taxonomy" class="btn btn-link">Taxonomy</th>
                   </form>
                 </tr>
               </thead>
               <tbody>
-              <?php $db->query("SELECT course_number, course_title, contact_hours, credits, schedule_days, taxonomy FROM classes ORDER by ".$sort);?>
-                
+              <?php 
+			  if(isset($_POST['search'])){
+				  //If there is an item in the search bar it will sort by the taxonomy
+				  $db->query("SELECT * FROM classes WHERE taxonomy LIKE '%".$_POST['search']."%' ORDER by ".$sort);
+			  }else{
+				  //If no item in search bar it will pull everything
+				$db->query("SELECT course_number, course_title, contact_hours, credits, schedule_days, taxonomy FROM classes ORDER by ".$sort);
+			  }
+			  ?>
+			  
               </tbody>
             </table>
           </div>

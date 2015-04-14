@@ -2,6 +2,7 @@
 require_once('../database/Database.php');
 
 $db = new Database('localhost', 'wjuphysi_nic', 'physical2015', 'wjuphysi_syllabi');
+
 $taxonomy = $_POST["taxonomy"];
 $objective = $_POST["objective"];
 $tax = implode(",", $taxonomy);
@@ -14,14 +15,38 @@ $facultyString = implode(",", $faculty);
 
 
 //$cn, $ct, $ch, $credits, $schedule_days
-$db->insert("course_number, course_title, contact_hours, credits, description, schedule_days, location, faculty, phone, email, resources, taxonomy, additional_items", "'".$_POST['courseNumber']."', '".$_POST['courseTitle']."', '".$_POST['contactHours']."', '".$_POST['credits']."', '".$_POST['description']."', '".$schedule_days."','".$_POST['location']."', '".$facultyString."','".$_POST['phoneNumber']."','".$_POST['email']."','".$_POST['resources']."','".$tax."','".$additionalItems."'");
+//$db->insert("course_number, course_title, contact_hours, credits, description, schedule_days, location, faculty, phone, email, resources, taxonomy, additional_items", "'".$_POST['courseNumber']."', '".$_POST['courseTitle']."', '".$_POST['contactHours']."', '".$_POST['credits']."', '".$_POST['description']."', '".$schedule_days."','".$_POST['location']."', '".$facultyString."','".$_POST['phoneNumber']."','".$_POST['email']."','".$_POST['resources']."','".$tax."','".$additionalItems."'");
 ?>
 
 <html>
-<head>
-	<title><?php echo $_POST["courseTitle"]; ?></title>
+<head><head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../../favicon.ico">
+
+    <title><?php echo $_POST["courseTitle"]; ?></title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../../css/bootstrap.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="../../css/dashboard.css" rel="stylesheet">
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="../../../assets/js/ie-emulation-modes-warning.js"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <style src="../../js/documents.js"></style>
 	<style>
-		body{
+		.syl{
 			font-family: "Times New Roman", Times, serif; 
 			width: 750px;
 			padding:30px;
@@ -40,7 +65,6 @@ $db->insert("course_number, course_title, contact_hours, credits, description, s
 		}
 
 		tr{
-			border: 1px solid green;
 			border-spacing: 3em;
 			padding-bottom:3em;
 		}
@@ -51,13 +75,58 @@ $db->insert("course_number, course_title, contact_hours, credits, description, s
 		.title{
 			font-weight: bold;
 			text-transform: uppercase;
+			text-align: left;
+		}
+		.centerTitle{
+			font-weight: bold;
+			text-transform: uppercase;
+			text-align: center;
 		}
 
 
 	</style>
-</head>
+  </head>
+	
+	
 	<body>
-		<div class="title" style="text-align:center">
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="../../index.html">WJU PT</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="/faculty/profile/profile.php">Craig Ruby</a></li>
+            <li><a href="/faculty/faculty.php">Dashboard</a></li>
+            <li><a href="#" onclick="print()">Print</a></li>
+          </ul>
+          <!--<form class="navbar-form navbar-right">
+            <input type="text" class="form-control" placeholder="Search...">
+          </form>-->
+        </div>
+      </div>
+    </nav>
+
+    <div class="container">
+
+	  <div class="col-sm-3 col-md-2 sidebar">
+          <ul class="nav nav-sidebar">
+            <li><a href="../faculty.php">Overview</a></li>
+            <li><a href="../documents.php">Documents</a></li>
+            <li><a href="../classes.html">Classes</a></li>
+          </ul>
+      </div>
+      <div>
+      <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main syl">
+      <!--button style="btn btn-primary" onclick="print()">Click Here to Print</button-->
+      <div if="printDiv">
+       <div class="centerTitle">
 			<h3>Wheeling Jesuit University</h3><br/>
 			<h3>Department of Physical Therapy</h3><br/>
 			
@@ -278,6 +347,17 @@ $db->insert("course_number, course_title, contact_hours, credits, description, s
 						?></ol>
 				</p>
 				<p>*Major Categories in the Taxonomy of Educational Objectives (Bloom 1956)</p>
+				</div>
+				</div>
+				</div>
+				</div>
+				<!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="../../js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../../../assets/js/ie10-viewport-bug-workaround.js"></script>
 	<body>
 </html>
 <?php $db->disconnect();?>

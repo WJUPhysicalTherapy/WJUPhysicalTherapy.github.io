@@ -96,7 +96,7 @@ if(isset($_POST['syllabusFormSubmit'])){
 
 
             <li class="active">
-              <a href="documents.html">Documents <span class=
+              <a href="documents.php">Documents <span class=
                 "sr-only">(current)</span></a>
               </li>
 
@@ -167,7 +167,7 @@ if(isset($_POST['syllabusFormSubmit'])){
                       "description">Description</label>
 
                       <div class="col-md-6">
-                        <textarea id="description" name="description" cols="56" rows="5"></textarea>
+                        <textarea class="form-control" id="description" name="description" cols="56" rows="5"></textarea>
                       </div>
                     </div>
                     <!-- Multiple Checkboxes (inline) -->
@@ -297,7 +297,7 @@ if(isset($_POST['syllabusFormSubmit'])){
                         "email">Email:</label>
 
                         <div class="col-md-6">
-                          <input class="form-control input-md" id="resources" name=
+                          <input class="form-control input-md" id="email" name=
                           "email" placeholder="Enter Email" type=
                           "email">
                         </div>
