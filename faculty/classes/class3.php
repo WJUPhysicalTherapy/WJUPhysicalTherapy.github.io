@@ -39,6 +39,8 @@ foreach ($schedule as $day => $n) {
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+
+    <style src="../../js/documents.js"></style>
 	<style>
 		.syl{
 			font-family: "Times New Roman", Times, serif; 
@@ -98,7 +100,7 @@ foreach ($schedule as $day => $n) {
           <ul class="nav navbar-nav navbar-right">
             <li><a href="/faculty/profile/profile.php">Craig Ruby</a></li>
             <li><a href="/faculty/faculty.php">Dashboard</a></li>
-            <li><a href="#">Help</a></li>
+            <li><a href="#" onclick="print()">Print</a></li>
           </ul>
           <!--<form class="navbar-form navbar-right">
             <input type="text" class="form-control" placeholder="Search...">
@@ -118,8 +120,8 @@ foreach ($schedule as $day => $n) {
       </div>
       <div>
       <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main syl">
-
-      
+      <!--button style="btn btn-primary" onclick="print()">Click Here to Print</button-->
+      <div if="printDiv">
        <div class="centerTitle">
 			<h3>Wheeling Jesuit University</h3><br/>
 			<h3>Department of Physical Therapy</h3><br/>
@@ -347,7 +349,8 @@ foreach ($schedule as $day => $n) {
 				</p>
 				<p>*Major Categories in the Taxonomy of Educational Objectives (Bloom 1956)</p>
 				</div>
-      </div>
+				</div><!--End Print Div-->
+      </div><!--End Centering Div-->
 
     </div><!-- /.container */-->
 

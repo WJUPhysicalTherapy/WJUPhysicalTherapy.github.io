@@ -7,9 +7,14 @@ $objective = $_POST["objective"];
 $tax = implode(",", $taxonomy);
 $schedule = $_POST["schedule"];
 $schedule_days = implode(",", $schedule);
-echo $schedule_days;
+$addItems = $_POST["additionalItems"];
+$additionalItems = implode(",", $addItems);
+$faculty = $_POST["faculty"];
+$facultyString = implode(",", $faculty);
+
+
 //$cn, $ct, $ch, $credits, $schedule_days
-$db->insert("'".$_POST['courseNumber']."', '".$_POST['courseTitle']."', '".$_POST['contactHours']."', '".$_POST['credits']."', '".$schedule_days."','".$tax."'");
+$db->insert("course_number, course_title, contact_hours, credits, description, schedule_days, location, faculty, taxonomy, additional_items", "'".$_POST['courseNumber']."', '".$_POST['courseTitle']."', '".$_POST['contactHours']."', '".$_POST['credits']."', '".$_POST['description']."', '".$schedule_days."','".$_POST['location']."', '".$facultyString."','".$tax."','".$additionalItems."'");
 ?>
 
 <html>
@@ -104,10 +109,10 @@ $db->insert("'".$_POST['courseNumber']."', '".$_POST['courseTitle']."', '".$_POS
 			<tr>
 				<th>Faculty:</th>
 				<td><?php
-				$faculty = $_POST["faculty"];
 				foreach ($faculty as $professor) {
 					echo $professor."<br />";
-				} ?></td>
+				}
+				 ?></td>
 			</tr>
 			<tr class="spacer"></tr>
 			<tr>

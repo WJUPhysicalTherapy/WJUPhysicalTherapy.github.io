@@ -63,6 +63,26 @@ class Database {
 		}
 	}
 
+	public function queryFiles(){
+		global $conn;
+		$sql = "SELECT course_title, course_number FROM classes;";
+		if(!$conn){
+			echo "Boo No Connection!";
+		}
+		//$sql = "SELECT course_title FROM classes"
+		$result = mysqli_query($conn, $sql);
+		//echo $conn;
+		if(mysqli_num_rows($result) > 0){
+			//output data of each row
+			while($row = mysqli_fetch_assoc($result)){
+				//echo $row['course_title'];
+				echo '<button type="submit" class="list-group-item" value="'.$row["course_number"].'" name="classNumber" style="width:100%;">'.$row["course_title"].'</button><br/>';
+			}
+		} else {
+			echo "0 results";
+		}
+	}
+
 	public function queryArray($col, $where){
 		global $conn;
 		$sql = "SELECT ".$col." FROM classes WHERE course_number ='".$where."';";
@@ -135,15 +155,16 @@ class Database {
 		}
 	}
 	
-	public function insert($insertItems){
+	public function insert($classes, $insertItems){
 		global $conn;
-		echo $insertItems."<br />";
-		$sql = "INSERT INTO classes(course_number, course_title, contact_hours, credits, schedule_days, taxonomy)
+		//echo $insertItems."<br />";
+		$sql = "INSERT INTO classes(".$classes.")
 				VALUES(".$insertItems.");";
 		/*if(!isset($insertItems)){
 			echo "Not Added";
-		}else */if(mysqli_query($conn, $sql)){
-			//echo "<script type='text/javascript'>alert('New record created');</script>";
+		}else */
+		if(mysqli_query($conn, $sql)){
+			echo "<script type='text/javascript'>alert('New record created');</script>";
 		}else{
 			echo mysqli_error($conn);
 		}

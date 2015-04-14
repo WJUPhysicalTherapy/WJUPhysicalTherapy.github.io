@@ -64,7 +64,7 @@ if(isset($_POST['syllabusFormSubmit'])){
           <div class="navbar-collapse collapse" id="navbar">
             <ul class="nav navbar-nav navbar-right">
               <li>
-                <a href="#">Craig Ruby</a>
+                <a href="/faculty/profile/profile.php">Craig Ruby</a>
               </li>
 
 

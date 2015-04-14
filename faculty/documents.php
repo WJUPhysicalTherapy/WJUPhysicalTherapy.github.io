@@ -1,4 +1,7 @@
+<?php
+require_once('../database/Database.php');
 
+$db = new Database('localhost', 'wjuphysi_nic', 'physical2015', 'wjuphysi_syllabi');?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -67,13 +70,14 @@
       <h1>Select a Syllabus</h1>
       <div class="list-group" >
       <form method="post" action="classes/class3.php">
-  		<button type="submit" class="list-group-item" value="617" name="classNumber">Service Learning I</button>
-  		<a href="classes/class2.html" class="list-group-item" value="627" name="classNumber">Service Learning II</a>
-  		</form>
+      <!--<button type="submit" class="list-group-item" value="617" name="classNumber" style="width:100%;">Service Learning I</button><br/>
+      <button type="submit" class="list-group-item" value="627" name="classNumber" style="width:100%;">Service Learning II</button>
+      <button type="submit" class="list-group-item" value="627" name="classNumber" style="width:100%;"></button>-->
+      <?php $db->queryFiles()?>
+      </form>
 	</div>
 	<!--<button type="file" class="btn btn-default btn-lg">-->
-		<div class="file_button_container btn btn-default btn-lg"><span class="glyphicon glyphicon-upload" aria-hidden="true"></span>&nbsp;Upload New Document<input type="file" value="Upload New Document" /></div> 
-	</button>
+		<div class="file_button_container btn btn-default btn-lg btn-file"><span class="glyphicon glyphicon-upload" aria-hidden="true"></span>&nbsp;Upload Old Document<input type="file" value="Upload New Document" /></div>
 	<a href="add-syllabus.php"><button type="button" class="btn btn-default btn-lg">
 		<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Create New Syllabus
 	</button></a>
@@ -104,3 +108,4 @@
     <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
   </body>
 </html>
+<?php $db->disconnect();?>
