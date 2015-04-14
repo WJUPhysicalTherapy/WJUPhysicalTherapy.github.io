@@ -3,6 +3,14 @@ require_once('../database/Database.php');
 
 $db = new Database('localhost', 'wjuphysi_nic', 'physical2015', 'wjuphysi_syllabi');
 //$profileDb = new Database('localhost', 'wjuphysi_chafo', 'physical2015', 'wjuphysi_profiles');
+
+if(isset($_POST['orderBy'])){
+  $sort = $_POST['orderBy'];
+}else{
+  $sort = 'course_number';
+}
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -31,6 +39,19 @@ $db = new Database('localhost', 'wjuphysi_nic', 'physical2015', 'wjuphysi_syllab
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+
+
+    <script type="text/javascript">
+      function currentSort(el){
+        el.className = "btn btn-primary";
+      }
+    </script>
+
+    <script type="text/css">
+    .btn-link{
+      color:#000000;
+    }
+    </script>
   </head>
 
   <body>
@@ -49,7 +70,7 @@ $db = new Database('localhost', 'wjuphysi_nic', 'physical2015', 'wjuphysi_syllab
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
             <li><a href="/faculty/profile/profile.php?<?php echo $_POST['email']?>">Craig Ruby</a></li>
-            <li><a href="#">Settings</a></li>
+            <li><a href="../faculty/faculty.php">Dashboard</a></li>
             <li><a href="#">Help</a></li>
           </ul>
           <!--<form class="navbar-form navbar-right">
@@ -73,19 +94,21 @@ $db = new Database('localhost', 'wjuphysi_nic', 'physical2015', 'wjuphysi_syllab
 
           <h2 class="sub-header">Classes</h2>
           <div class="table-responsive">
-            <table data-url="../database/data1.json"class="table table-striped" data-sort-name="name" data-sort-order="desc">
+            <table class="table table-striped" data-sort-name="name">
               <thead>
                 <tr>
-                  <th data-field="id" data-sortable="true">#</th>
-                  <th data-field="name" data-sortable="true">Course</th>
-                  <th data-field="price" data-sortable="true">Contact Hours</th>
-                  <th data-field="credits" data-sortable="true">Credits</th>
-                  <th data-field="schedule" data-sortable="true">Days</th>
-				  <th data-field="taxonomy" data-sortable="true">Taxonomy</th>
+                <form method="post" action="faculty.php">
+                  <th data-field="id" data-sortable="true" class="sort"><button id="num" type="submit" name="orderBy" value="course_number" class="btn btn-link">#</th>
+                  <th data-field="name" data-sortable="true"><button id="course" type="submit" name="orderBy" value="course_title" class="btn btn-link">Course</button></th>
+                  <th data-field="price" data-sortable="true"><button id="contact" type="submit" name="orderBy" value="contact_hours" class="btn btn-link">Contact Hours</th>
+                  <th data-field="credits" data-sortable="true"><button id="credits" type="submit" name="orderBy" value="credits" class="btn btn-link">Credits</th>
+                  <th data-field="schedule" data-sortable="true"><button id="days" type="submit" name="orderBy" value="schedule_days" class="btn btn-link">Days</th>
+				          <th data-field="taxonomy" data-sortable="true"><button id="tax" type="submit" name="orderBy" value="taxonomy" class="btn btn-link">Taxonomy</th>
+                  </form>
                 </tr>
               </thead>
               <tbody>
-              <?php $db->query("SELECT course_number, course_title, contact_hours, credits, schedule_days, taxonomy FROM classes");?>
+              <?php $db->query("SELECT course_number, course_title, contact_hours, credits, schedule_days, taxonomy FROM classes ORDER by ".$sort);?>
                 
               </tbody>
             </table>
@@ -94,6 +117,9 @@ $db = new Database('localhost', 'wjuphysi_nic', 'physical2015', 'wjuphysi_syllab
       </div><!--End Div Row-->
     </div>
 <?php $db->disconnect();?>
+
+
+    
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->

@@ -74,7 +74,7 @@ if($pword != "" && $pmatch != false){
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
             <li><a href="profile.php"><?php $db->queryProfile("first_name", "1");echo " "; $db->queryProfile("last_name", "1");?></a></li>
-            <li><a href="#">Settings</a></li>
+            <li><a href="/faculty/faculty.php">Dashboard</a></li>
             <li><a href="#">Help</a></li>
           </ul>
           <!--<form class="navbar-form navbar-right">

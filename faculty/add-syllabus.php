@@ -69,7 +69,7 @@ if(isset($_POST['syllabusFormSubmit'])){
 
 
               <li>
-                <a href="#">Settings</a>
+                <a href="../faculty/faculty.php">Dashboard</a>
               </li>
 
               <li>

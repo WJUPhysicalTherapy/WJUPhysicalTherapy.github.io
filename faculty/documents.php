@@ -67,8 +67,8 @@
       <h1>Select a Syllabus</h1>
       <div class="list-group" >
       <form method="post" action="classes/class3.php">
-  		<button type="submit" class="list-group-item" value="617" name="classNumber" style="width:100%;">Service Learning I</button><br/>
-  		<button type="submit" class="list-group-item" value="627" name="classNumber" style="width:100%;">Service Learning II</button>
+  		<button type="submit" class="list-group-item" value="617" name="classNumber">Service Learning I</button>
+  		<a href="classes/class2.html" class="list-group-item" value="627" name="classNumber">Service Learning II</a>
   		</form>
 	</div>
 	<!--<button type="file" class="btn btn-default btn-lg">-->

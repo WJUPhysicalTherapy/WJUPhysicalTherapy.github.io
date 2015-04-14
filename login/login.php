@@ -53,6 +53,7 @@ $db = new Database('localhost', 'wjuphysi_chafo', 'physical2015', 'wjuphysi_prof
         <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
         <label for="inputPassword" class="sr-only">Password</label>
         <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
+        <input type="hidden" name="orderBy" value="course_number">
         <div class="checkbox">
           <label>
             <input type="checkbox" value="remember-me"> Remember me

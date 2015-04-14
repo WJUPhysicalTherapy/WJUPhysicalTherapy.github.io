@@ -5,6 +5,7 @@ $db = new Database('localhost', 'wjuphysi_nic', 'physical2015', 'wjuphysi_syllab
 
 $schedule_days = "";
 $schedule = $_POST["schedule"];
+$class = $_POST["classNumber"];
 foreach ($schedule as $day => $n) {
 	$schedule_days += $schedule[$day].", ";
 }
@@ -95,8 +96,8 @@ foreach ($schedule as $day => $n) {
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Craig Ruby</a></li>
-            <li><a href="#">Settings</a></li>
+            <li><a href="/faculty/profile/profile.php">Craig Ruby</a></li>
+            <li><a href="/faculty/faculty.php">Dashboard</a></li>
             <li><a href="#">Help</a></li>
           </ul>
           <!--<form class="navbar-form navbar-right">
@@ -130,32 +131,32 @@ foreach ($schedule as $day => $n) {
 		<table>
 			<tr>
 				<th>Course Number:</th>
-				<td><?php $db->querySingle("course_number", "617"); ?></td>
+				<td>DPT <?php $db->querySingle("course_number", $class); ?></td>
 			</tr>
 			<tr></tr>
 			<tr>
 				<th>Course Title:</th>
-				<td><?php $db->querySingle("course_title", "617"); ?></td>
+				<td><?php $db->querySingle("course_title", $class); ?></td>
 			</tr>
 			<tr></tr>
 			<tr>
 				<th>Contact Hours:</th>
-				<td><?php $db->querySingle("contact_hours", "617"); ?> hours per week</td>
+				<td><?php $db->querySingle("contact_hours", $class); ?> hours per week</td>
 			</tr>
 			<tr></tr>
 			<tr>
 				<th>Credits:</th>
-				<td><?php $db->querySingle("credits", "617"); ?></td>
+				<td><?php $db->querySingle("credits", $class); ?></td>
 			</tr>
 			<tr class="spacer"><td>  </td></tr>
 			<tr>
 				<th>Description:</th>
-				<td><?php $db->querySingle("description", "617"); ?></td>
+				<td><?php $db->querySingle("description", $class); ?></td>
 			</tr>
 			<tr class="spacer"></tr>
 			<tr>
 				<th>Schedule:</th>
-				<td><?php $db->querySingle("schedule_days", "617");
+				<td><?php $db->querySingle("schedule_days", $class);
 				//$schedule = $_POST["schedule"];
 				//foreach ($schedule as $day => $n) {
 					//echo $schedule[$day].", ";
@@ -165,56 +166,43 @@ foreach ($schedule as $day => $n) {
 			<tr></tr>
 			<tr>
 				<th>Location:</th>
-				<td><?php $db->querySingle("location", "617"); ?></td>
+				<td><?php $db->querySingle("location", $class); ?></td>
 			</tr>
 			<tr class="spacer"></tr>
 			<tr>
 				<th>Faculty:</th>
-				<td><?php $db->querySingle("faculty", "617"); ?></td>
+				<td><?php $db->querySingle("faculty", $class); ?></td>
 			</tr>
 			<tr class="spacer"></tr>
 			<tr>
 				<th>Office Hours:</th>
-				<td><?php $db->querySingle("office_hours", "617"); ?></td>
+				<td><?php $db->querySingle("office_hours", $class); ?></td>
 			</tr>
 			<tr></tr>
 			<tr>
 				<th>Phone:</th>
-				<td><?php $db->querySingle("phone", "617"); ?></td>
+				<td><?php $db->querySingle("phone", $class); ?></td>
 			</tr>
 			<tr></tr>
 			<tr>
 				<th>E-Mail:</th>
-				<td><?php $db->querySingle("email", "617"); ?></td>
+				<td><?php $db->querySingle("email", $class); ?></td>
 			</tr>
 			<tr class="spacer"></tr>
 			<tr>
 				<th>Resources:</th>
-				<td><?php $db->querySingle("resources", "617"); ?></td>
+				<td><?php $db->querySingle("resources", $class); ?></td>
 			</tr>
-			<tr></tr>
+			<tr class="spacer"></tr>
 			</table>
 			<?php 
-				$itemQue = $db->querySingle("additionalItems", "617");
-				$items = explode(',', $itemQue);
-				for ($i=0; $i <count($items); $i++) { 
-					echo $items[0];
-				}
-				if(empty($items)){
-					echo "Nothing Here I think";
-				}else{
-					echo "Something Here";
-					$n = count($items);
-
-					for($i=0; $i<$n; $i++){
-						//echo $items[$i]." ";
-					}
-				}
-				for($j=0; $j<$n; $j++){
-						if($items[$j] == 'a'){
+				$items = $db->queryArray("additional_items", $class);
+				$itemQue = explode(',', $items);
+				for($j=0; $j<10; $j++){
+						if($itemQue[$j] == 'a'){
 							echo "<p><span class='title'>Academic Dishonesty Policy:</span>Please refer to PT Student Handbook.</p>";
 						}
-						if($items[$j] == 'b'){
+						if($itemQue[$j] == 'b'){
 							echo "<p><span class='title'>Statement of Academic Integrity:</span>
 									Academic integrity means giving credit where credit is due in an academic setting.  It is an ethical 
 									obligation of all people who perform intellectual work including students, faculty members, and administrators
@@ -235,7 +223,7 @@ foreach ($schedule as $day => $n) {
 									</ul>
 								</p>";
 						}
-						if($items[$j] == 'c'){
+						if($itemQue[$j] == 'c'){
 							echo "<p><span class='title'>Attendance Policy:</span>
 				Please refer to PT Student Handbook. Absenteeism (more than once) and/or tardiness 
 				(more than twice) will be reported to the Academic Progress Committee of the Program.  
@@ -244,7 +232,7 @@ foreach ($schedule as $day => $n) {
 				your final grade for each unjustified absences or episode of tardiness up to 5% of your 
 				total grade.</p>";
 						}
-						if($items[$j] == 'd'){
+						if($itemQue[$j] == 'd'){
 							echo "<p><span class='title'>Professional Behavior Expectations:</span>
 				At the instructor’s discretion, a maximum of 10% of total grade points may be deducted 
 				for failure to present with professional comportment under all circumstances during this course.
@@ -252,14 +240,14 @@ foreach ($schedule as $day => $n) {
 				the Academic Progress Committee for appropriate intervention.
 				</p>";
 						}
-						if($items[$j] == 'e'){
+						if($itemQue[$j] == 'e'){
 							echo "<p><span class='title'>Electronic Devices:</span>
 				As a courtesy to everyone involved in the course electronic devices such as beepers and cell 
 				phones are to be turned off (no sound or vibrating) during class.  If, for some extenuating circumstance, 
 				you must be in communication with people outside of class please alert the instructor prior to the 
 				start of class.</p>";
 						}
-						if($items[$j] == 'f'){
+						if($itemQue[$j] == 'f'){
 							echo "<p><span class='title'>Examinations:</span>
 				Written examinations will include material covered in lectures, class discussions, and assigned 
 				readings. The exam questions may consist of but are not limited to oral questions, multiple choice, 
@@ -281,7 +269,7 @@ foreach ($schedule as $day => $n) {
 				Tardiness for an exam will not be given additional time. 
 				</p>";
 						}
-						if($items[$j] == 'g'){
+						if($itemQue[$j] == 'g'){
 							echo "<p><span class='title'>Academic Resource Center (ARC):</span></p>
 									<p>
 									The Academic Resource Center or ARC, located on the ground floor of Ignatius Hall, is a place where students who
@@ -304,7 +292,7 @@ foreach ($schedule as $day => $n) {
 									ARC website at www.wju.edu/arc to learn more about what the ARC has to offer.  Contact the ARC via e-mail at arc@wju.edu or FAX at 304-243-4457.
 									</p>";
 						}
-						if($items[$j] == 'h'){
+						if($itemQue[$j] == 'h'){
 							echo "<p><span class='title'>Disability Services:</span>
 										Wheeling Jesuit University encourages faculty, staff and administration to assist students with disabilities in achieving academic success.  The University offers students with documented disabilities reasonable accommodations on a case-by-case basis with confidentiality in compliance with the Americans with Disabilities Act and Section 504 of the Rehabilitation Act of 1973.  Students with special academic needs due to physical or learning disabilities should contact the Disability Services Director at 304-243-4484.   Disability Services are coordinated through the Academic Resource Center (ARC) located in G 24 on the ground floor of Ignatius Hall.  A learning disabilities specialist is available at the ARC to provide assistance with time management, study skills, or strategies that specifically address learning disability issues.
 									</p>
@@ -312,7 +300,7 @@ foreach ($schedule as $day => $n) {
 										In order to receive assistance, students must disclose their disability to the university, provide current and comprehensive documentation concerning the nature and extent of the disability, and communicate their specific needs to the Disability Services Director.  Wheeling Jesuit University is committed to providing reasonable accommodations to students with disabilities; however, it is the responsibility of these students to seek out available assistance on campus and to utilize individualized adjustments.  Ultimately, all students are responsible for their own academic achievement.  They must attend classes, complete course assignments and fulfill all university requirements for their chosen field of study.
 										</p>";
 							}
-						if($items[$j] == 'i'){
+						if($itemQue[$j] == 'i'){
 							echo "<p><span class='title'>Grading Policy:</span>
 								This is a pass/fail course.  Attendance at each assignment and completion of tasks as assigned is required for successful completion of this course.
 									<br/>1. Paper on the reading:  Drnach, M., Developing Cultural Awareness.  
@@ -333,7 +321,12 @@ foreach ($schedule as $day => $n) {
 				
 				<p><span class="title">Objectives:</span>The student will be able to:
 					<ol>
-						<?php $db->querySingle("objectives", "617");
+						<?php $obj = $db->queryArray("objectives", $class);
+							$objectives = explode(".", $obj);
+							//echo $obj;
+							for($i=0; $i<count($objectives)-1; $i++){
+								echo "<li>".$objectives[$i]."</li>";
+							}
 							//$objective = $_POST["objective"];
 							//$taxonomy = $_POST["taxonomy"];
 							//for ($x =0; $x < sizeof($objective); $x++) {

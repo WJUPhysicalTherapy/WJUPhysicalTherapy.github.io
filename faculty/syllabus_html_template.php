@@ -2,15 +2,14 @@
 require_once('../database/Database.php');
 
 $db = new Database('localhost', 'wjuphysi_nic', 'physical2015', 'wjuphysi_syllabi');
-
-$schedule_days = "";
+$taxonomy = $_POST["taxonomy"];
+$objective = $_POST["objective"];
+$tax = implode(",", $taxonomy);
 $schedule = $_POST["schedule"];
-foreach ($schedule as $day => $n) {
-	$schedule_days += $schedule[$day].", ";
-}
+$schedule_days = implode(",", $schedule);
+echo $schedule_days;
 //$cn, $ct, $ch, $credits, $schedule_days
-$db->insert($_POST["courseNumber"], $_POST["courseTitle"], $_POST["contactHours"], $_POST["credits"], $_POST["schedule"], $tax);
-echo $tax;
+$db->insert("'".$_POST['courseNumber']."', '".$_POST['courseTitle']."', '".$_POST['contactHours']."', '".$_POST['credits']."', '".$schedule_days."','".$tax."'");
 ?>
 
 <html>
@@ -64,7 +63,7 @@ echo $tax;
 		<table>
 			<tr>
 				<th>Course Number:</th>
-				<td><?php echo $_POST["courseNumber"]; ?></td>
+				<td>DPT <?php echo $_POST["courseNumber"]; ?></td>
 			</tr>
 			<tr></tr>
 			<tr>
@@ -89,7 +88,7 @@ echo $tax;
 			<tr class="spacer"></tr>
 			<tr>
 				<th>Schedule:</th>
-				<td><?php $schedule_days;
+				<td><?php echo $schedule_days;
 				//$schedule = $_POST["schedule"];
 				//foreach ($schedule as $day => $n) {
 					//echo $schedule[$day].", ";
@@ -266,27 +265,12 @@ echo $tax;
 				
 				<p><span class="title">Objectives:</span>The student will be able to:
 					<ol>
-						<?php
-							$objective = $_POST["objective"];
-							$taxonomy = $_POST["taxonomy"];
-							$tax ="";
+						<?php							
 							for ($x =0; $x < sizeof($objective); $x++) {
 								echo "<li>".$objective[$x]." (".$taxonomy[$x]."*)</li>";
-								$tax += $taxonomy[$x];
 							} 
-							echo $tax;
-						?>
-						<!--<li>To identify attributes of his or her own culture and cultural practices; (2*)</li>
-						<li>Examine the organizational structure of an organization and its purpose both internally and externally. (1*)</li>
-						<li>Develop an appreciation for professional, social and civic responsibility. (2*)</li>
-						<li>Acquire skills to become effective in advocacy. (2*)</li>
-						<li>Allow students to challenge assumptions, biases, and prejudices on social, cultural, racial, health, ethical and political issues. (2*)</li>
-						<li>Investigate local resources to assist with the identified health care needs of the clients served. (3*)</li>
-						<li>To introduce and explore leadership skills. (2*)</li>
-						<li>Examine the quality of the service delivery and the factors that influence the quality. (2*)</li>
-						<li>Allow students to develop skills in public education and consultation including, but not limited to the subjects of prevention, wellness and health promotion. (2*)</li>
-						<li>Apply basic physical therapy skills acquired during the didactic preparation in Term I. (3*)</li>
-					--></ol>
+							//echo $tax;
+						?></ol>
 				</p>
 				<p>*Major Categories in the Taxonomy of Educational Objectives (Bloom 1956)</p>
 	<body>
