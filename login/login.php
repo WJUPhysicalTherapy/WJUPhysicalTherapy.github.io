@@ -1,4 +1,8 @@
 <?php
+session_start();
+if(isset($_SESSION["myusername"])){
+  header("location:/faculty/faculty.php");
+}
 require_once('../database/Database.php');
 $db = new Database('localhost', 'wjuphysi_chafo', 'physical2015', 'wjuphysi_profiles');
 
@@ -34,26 +38,56 @@ $db = new Database('localhost', 'wjuphysi_chafo', 'physical2015', 'wjuphysi_prof
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-    <?php
-      if($db->isRecord($_POST["email"], $_POST["password"])){
-        echo "<script type='text/javascript'>document.getElementByTag('form').setAttribute('action', '../faculty/faculty.php');</script>";
-      }else{
-        echo "Doesnt Work";
-      }
-    ?>
+
+
+    <script type='text/javascript'>
+    public function wrong(){
+      var fail = document getElementById(divFail);
+      fail.className += "has-error";
+    }
+    </script>
   </head>
 
   <body>
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="../index.html">WJU PT</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+          </ul>
+          <!--<form class="navbar-form navbar-right">
+            <input type="text" class="form-control" placeholder="Search...">
+          </form>-->
+        </div>
+      </div>
+    </nav>
 
     <div class="container">
 
-      <form id="loginForm" class="form-signin" method="post" action="../faculty/faculty.php">
+      <form id="loginForm" class="form-signin" method="post" action="checklogin.php"><!--../faculty/faculty.php">-->
         <h2 class="form-signin-heading">Please sign in</h2>
-        <label for="inputEmail" class="sr-only">Email address</label>
-        <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-        <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
+        <div class="form-group <?php if($_GET['failed'] === 'true'){echo 'has-error';}?>">
+          <label for="inputEmail" class="sr-only">Username</label>
+          <input type="text" name="username" id="inputUsername" class="form-control" placeholder="Username" required autofocus>
+        </div>
+        <div id="divFail" class="form-group <?php if($_GET['failed'] === 'true'){echo 'has-error';}?>">
+          <label for="inputPassword" class="sr-only">Password</label>
+          <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
+        </div>
         <input type="hidden" name="orderBy" value="course_number">
+        <?php if($_GET['failed'] === 'true'){echo '<div class="alert alert-danger">
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        <span class="sr-only">Error:</span>
+          Username or Password Incorrect.
+        </div>';}?>
         <div class="checkbox">
           <label>
             <input type="checkbox" value="remember-me"> Remember me

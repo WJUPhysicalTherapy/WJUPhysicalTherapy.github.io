@@ -1,3 +1,11 @@
+<?php session_start();
+  if(isset($_SESSION["myusername"])){
+  }else{
+    echo $_SESSION['myusername'];
+    header("location:../../index.html");
+    //die();
+  }
+?>
 <?php
 require_once('../../database/Database.php');
 
@@ -94,7 +102,7 @@ $class = $_POST["classNumber"];
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="/faculty/profile/profile.php">Craig Ruby</a></li>
+            <li><a href="/faculty/profile/profile.php"><?php echo $db->queryProfile("first_name", $_SESSION['myusername']); echo  " "; echo $db->queryProfile("last_name", $_SESSION['myusername']); ?></a></li>
             <li><a href="/faculty/faculty.php">Dashboard</a></li>
             <li><a href="#" onclick="print()">Print</a></li>
           </ul>
@@ -366,11 +374,13 @@ $class = $_POST["classNumber"];
 						echo "<p><span class='title'>Objectives:</span>The student will be able to:";
 						echo "<ol>";
 						$obj = $db->queryArray("objectives", $class);
-							$objectives = explode(".", $obj);
-							//echo $obj;
-							for($i=0; $i<count($objectives)-1; $i++){
-								echo "<li>".$objectives[$i]."</li>";
-							}
+						$objectives = explode(".", $obj);
+						$tax = $db->queryArray("taxonomy", $class);
+						$taxonomy = explode(",", $tax);
+						//echo $obj;
+						for($i=0; $i<count($objectives)-1; $i++){
+							echo "<li>".$objectives[$i]."(".$taxonomy[$i]."*)</li>";
+						}
 						echo "</ol></p>";
 						echo "<p>*Major Categories in the Taxonomy of Educational Objectives (Bloom 1956)</p>";
 					}

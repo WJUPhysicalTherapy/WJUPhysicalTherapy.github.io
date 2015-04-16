@@ -1,3 +1,11 @@
+<?php session_start();
+  if(isset($_SESSION["myusername"])){
+  }else{
+    echo $_SESSION['myusername'];
+    header("location:../index.html");
+    //die();
+  }
+?>
 <?php
 //Database code
 require_once('../database/Database.php');
@@ -64,7 +72,7 @@ if(isset($_POST['syllabusFormSubmit'])){
           <div class="navbar-collapse collapse" id="navbar">
             <ul class="nav navbar-nav navbar-right">
               <li>
-                <a href="/faculty/profile/profile.php">Craig Ruby</a>
+                <a href="/faculty/profile/profile.php"><?php echo $db->queryProfile("first_name", $_SESSION['myusername']); echo  " "; echo $db->queryProfile("last_name", $_SESSION['myusername']); ?></a>
               </li>
 
 
@@ -73,7 +81,7 @@ if(isset($_POST['syllabusFormSubmit'])){
               </li>
 
               <li>
-                <a href="#">Help</a>
+                <a href="/login/logout.php">Logout</a>
               </li>
             </ul>
 

@@ -110,7 +110,7 @@ class Database {
 
 	public function queryProfile($col, $where){
 		global $conn;
-		$sql = "SELECT ".$col." FROM profiles WHERE id ='".$where."';";
+		$sql = "SELECT ".$col." FROM profiles WHERE username ='".$where."';";
 		//echo $sql;
 		
 		if(!$conn){

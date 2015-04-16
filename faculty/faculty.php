@@ -1,3 +1,12 @@
+<?php session_start();
+  if(isset($_SESSION["myusername"])){
+    //echo "Session Set";
+  }else{
+    echo $_SESSION['myusername'];
+    header("location:../index.html");
+    //die();
+  }
+?>
 <?php
 require_once('../database/Database.php');
 
@@ -70,9 +79,9 @@ if(isset($_POST['orderBy'])){
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="/faculty/profile/profile.php?<?php echo $_POST['email']?>">Craig Ruby</a></li>
+            <li><a href="/faculty/profile/profile.php?<?php echo $_POST['email']?>"><?php echo $db->queryProfile("first_name", $_SESSION['myusername']); echo  " "; echo $db->queryProfile("last_name", $_SESSION['myusername']); ?></a></li>
             <li><a href="../faculty/faculty.php">Dashboard</a></li>
-            <li><a href="#">Help</a></li>
+            <li><a href="/login/logout.php">Logout</a></li>
           </ul>
           <!--<form class="navbar-form navbar-right">
             <input type="text" class="form-control" placeholder="Search...">
@@ -92,7 +101,6 @@ if(isset($_POST['orderBy'])){
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
           <h1 class="page-header">Dashboard</h1>
-
           <h2 class="sub-header">Classes</h2>
           <div class="table-responsive">
 		  <!--Seach Bar-->

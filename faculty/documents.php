@@ -1,3 +1,10 @@
+<?php session_start();
+  if(isset($_SESSION["myusername"])){
+  }else{
+    header("location:../index.html");
+    //die();
+  }
+?>
 <?php
 require_once('../database/Database.php');
 
@@ -45,9 +52,9 @@ $db = new Database('localhost', 'wjuphysi_nic', 'physical2015', 'wjuphysi_syllab
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="../faculty/profile/profile.php">Craig Ruby</a></li>
+            <li><a href="../faculty/profile/profile.php"><?php echo $db->queryProfile("first_name", $_SESSION['myusername']); echo  " "; echo $db->queryProfile("last_name", $_SESSION['myusername']); ?></a></li>
             <li><a href="../faculty/faculty.php">Dashboard</a></li>
-            <li><a href="#">Help</a></li>
+            <li><a href="/login/logout.php">Logout</a></li>
           </ul>
           <!--<form class="navbar-form navbar-right">
             <input type="text" class="form-control" placeholder="Search...">

@@ -1,3 +1,13 @@
+<?php session_start();
+  if(isset($_SESSION["myusername"])){
+    $session = $_SESSION['myusername'];
+  }else{
+    echo $_SESSION['myusername'];
+    header("location:../../index.html");
+
+    //die();
+  }
+?>
 <?php
 require_once('../../database/Database.php');
 
@@ -73,9 +83,9 @@ if($pword != "" && $pmatch != false){
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="profile.php"><?php $db->queryProfile("first_name", "1");echo " "; $db->queryProfile("last_name", "1");?></a></li>
+            <li><a href="profile.php"><?php $db->queryProfile("first_name", $session);echo " "; $db->queryProfile("last_name", $session);?></a></li>
             <li><a href="/faculty/faculty.php">Dashboard</a></li>
-            <li><a href="#">Help</a></li>
+            <li><a href="/login/logout.php">Logout</a></li>
           </ul>
           <!--<form class="navbar-form navbar-right">
             <input type="text" class="form-control" placeholder="Search...">
@@ -96,7 +106,7 @@ if($pword != "" && $pmatch != false){
           <input type="file" class="form-control">
         </div>
         <div class="text-center">
-        Date Joined: <?php $db->queryProfile("date_joined", "1");?>
+        Date Joined: <?php $db->queryProfile("date_joined", $session);?>
         </div>
       </div>
 
@@ -114,19 +124,19 @@ if($pword != "" && $pmatch != false){
           <div class="form-group">
             <label class="col-lg-3 control-label">First name:</label>
             <div class="col-lg-8">
-              <input class="form-control" type="text" name="first_name" value="<?php $db->queryProfile("first_name", "1");?>">
+              <input class="form-control" type="text" name="first_name" value="<?php $db->queryProfile("first_name", $session);?>">
             </div>
           </div>
           <div class="form-group">
             <label class="col-lg-3 control-label">Last name:</label>
             <div class="col-lg-8">
-              <input class="form-control" name="last_name" type="text" value="<?php $db->queryProfile("last_name", "1");?>">
+              <input class="form-control" name="last_name" type="text" value="<?php $db->queryProfile("last_name", $session);?>">
             </div>
           </div>
           <div class="form-group">
             <label class="col-lg-3 control-label">Email:</label>
             <div class="col-lg-8">
-              <input class="form-control" name="email" type="text" value="<?php $db->queryProfile("email", "1");?>">
+              <input class="form-control" name="email" type="text" value="<?php $db->queryProfile("email", $session);?>">
             </div>
           </div>
           <!--<div class="form-group">
@@ -149,19 +159,19 @@ if($pword != "" && $pmatch != false){
           <div class="form-group">
             <label class="col-md-3 control-label">Username:</label>
             <div class="col-md-8">
-              <input class="form-control" name="username" type="text" value="<?php $db->queryProfile("username", "1");?>">
+              <input class="form-control" name="username" type="text" value="<?php $db->queryProfile("username", $session);?>">
             </div>
           </div>
           <div class="form-group">
             <label class="col-md-3 control-label">Password:</label>
             <div class="col-md-8">
-              <input class="form-control" name="password" type="password" value="<?php $db->queryProfile("password", "1");?>">
+              <input class="form-control" name="password" type="password" value="<?php $db->queryProfile("password", $session);?>">
             </div>
           </div>
           <div class="form-group">
             <label class="col-md-3 control-label">Confirm password:</label>
             <div class="col-md-8">
-              <input class="form-control" name="cpassword" type="password" value="<?php $db->queryProfile("password", "1");?>">
+              <input class="form-control" name="cpassword" type="password" value="<?php $db->queryProfile("password", $session);?>">
             </div>
           </div>
           <div class="form-group">
