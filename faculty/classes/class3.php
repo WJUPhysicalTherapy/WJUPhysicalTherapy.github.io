@@ -27,7 +27,7 @@ $class = $_POST["classNumber"];
     <meta name="author" content="">
     <link rel="icon" href="../../../favicon.ico">
 
-    <title>Starter Template for Bootstrap</title>
+    <title><?php echo $db->querySingle("course_number", $class); echo " "; echo $db->querySingle("course_title", $class);?></title>
 
     <!-- Bootstrap core CSS -->
     <link href="../../css/bootstrap.css" rel="stylesheet">
@@ -102,9 +102,9 @@ $class = $_POST["classNumber"];
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="/faculty/profile/profile.php"><?php echo $db->queryProfile("first_name", $_SESSION['myusername']); echo  " "; echo $db->queryProfile("last_name", $_SESSION['myusername']); ?></a></li>
+            <li><a href="/faculty/profile/profile.php"><?php echo $db->queryProfile("first_name", $_SESSION['id']); echo  " "; echo $db->queryProfile("last_name", $_SESSION['id']); ?></a></li>
             <li><a href="/faculty/faculty.php">Dashboard</a></li>
-            <li><a href="#" onclick="print()">Print</a></li>
+            <li><a href="#" onclick="/login/logout.php">Logout</a></li>
           </ul>
           <!--<form class="navbar-form navbar-right">
             <input type="text" class="form-control" placeholder="Search...">
@@ -112,6 +112,39 @@ $class = $_POST["classNumber"];
         </div>
       </div>
     </nav>
+
+
+
+    <div class="col-md-6 col-md-offset-3"><!--Start Editing navbar-->
+    	<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="#">View <span class="sr-only">(current)</span></a></li>
+        <li><a name="courseNumber"href="../edit-syllabus.php?courseNumber=<?php echo $db->querySingle("course_number", $class)?>">Edit</a></li>
+        <li><a href="#" onclick="print()">Print</a></li>
+        
+      </ul>
+        </li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+    </div><!--End editing Nav bar-->
+
+
 
     <div class="container">
 
@@ -195,9 +228,14 @@ $class = $_POST["classNumber"];
 			<?php 
 					if(null !== ($db->querySingle("faculty", $class))){
 						echo "<th>Faculty:</th>";
-						echo "<td>";
-						echo $db->querySingle("faculty", $class); 
-						echo "</td>";
+						echo "<td><ul class='list-unstyled'>";
+						$fac = $db->querySingle("faculty", $class);
+						$faculty = explode(',', $fac);
+						//echo $fac;
+						for($i=0; $i<count($faculty)-1; $i++){
+							echo "<li>".$faculty[$i]."</li>";
+						} 
+						echo "</ul></td>";
 					}
 					?>
 			</tr>

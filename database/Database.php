@@ -15,6 +15,28 @@ class Database {
 		mysql_close($conn);
 	}
 	
+	public function querySimple($col, $from, $where){
+		global $conn;
+		$sql = "SELECT ".$col." FROM ".$from." WHERE ".$where.";";
+		//return $sql;
+		if(!$conn){
+			echo "Boo No Connection!";
+		}
+		//$sql = "SELECT course_title FROM classes"
+		$result = mysqli_query($conn, $sql);
+		//echo $conn;
+		if(mysqli_num_rows($result) > 0){
+			//output data of each row
+			while($row = mysqli_fetch_assoc($result)){
+				//echo $row[$col];
+				$resultArray = $row;
+			}
+		} else {
+			return "0 results";
+		}
+		return $resultArray;
+	}
+
 	public function query($sql){
 		global $conn;
 		//echo $sql;
@@ -110,7 +132,7 @@ class Database {
 
 	public function queryProfile($col, $where){
 		global $conn;
-		$sql = "SELECT ".$col." FROM profiles WHERE username ='".$where."';";
+		$sql = "SELECT ".$col." FROM profiles WHERE id='".$where."';";
 		//echo $sql;
 		
 		if(!$conn){

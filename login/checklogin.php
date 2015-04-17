@@ -20,7 +20,19 @@ ob_start();
 	//$mypassword = mysqli_real_escape_string($mypassword);
 	echo "Username: $myusername Password: $mypassword <br/>";
 	$sql = "SELECT * FROM $tbl_name WHERE username='$myusername' and password='$mypassword'";
+	$sqlId = "SELECT id FROM $tbl_name WHERE username='$myusername' and password='$mypassword'";
 	$result = mysqli_query($conn, $sql);
+	$idResult = mysqli_query($conn, $sql);
+	if(mysqli_num_rows($idResult) > 0){
+			//output data of each row
+		while($row = mysqli_fetch_assoc($idResult)){
+			//echo $row[$col];
+			$_SESSION['id'] = $row['id'];
+		}
+	} else {
+		echo = "0 results";
+	}
+
 	//echo "Result: ".$result."<br/>";
 	//Mysql_num_row is counting table row
 	$count = mysqli_num_rows($result);
@@ -28,7 +40,6 @@ ob_start();
 	//If result matched $myusename and $mypassword,table row must be 1 row
 	if($count==1){
 		$_SESSION['myusername'] = $myusername;
-		$_SESSION['mypassword'] = $mypassword;
 		header("Location:/faculty/faculty.php");
 	}else{
 		header("location:/login/login.php?failed=true");

@@ -1,5 +1,5 @@
 <?php session_start();
-  if(isset($_SESSION["myusername"])){
+  if(isset($_SESSION["id"])){
   }else{
     echo $_SESSION['myusername'];
     header("location:../index.html");
@@ -16,17 +16,72 @@ $db = new Database('localhost', 'wjuphysi_nic', 'physical2015', 'wjuphysi_syllab
 $courseNumberErr = $courseTitleErr = $contactHoursErr = $creditsErr = $descriptionErr = $scheduleErr = $facultyErr = "";
 $courseNumber = $courseTitle = $contactHours = $credits = $description = $schedule = $faculty = "";
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+/*if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	if(empty($_POST["courseNumber"])){
 		$courseNumberErr = "Course number required";
 	} else {
 		$courseNumber = test_input($POST["courseNumber"]);
 	}
-}
+}*/
 
 if(isset($_POST['syllabusFormSubmit'])){
 	$db->insert();
 }
+
+$course = $_GET['courseNumber'];
+$result = $db->querySimple('*', 'classes', "course_number='".$course."'");
+
+//To check the schedule time
+$scDays = explode(",", $result['schedule_days']);
+//echo $scDays[0];
+for($i=0; $i < count($scDays); $i++){
+  if($scDays[$i] == 'monday'){
+    $mo = true;
+  }else if($scDays[$i] == 'tuesday'){
+    $tu = true;
+  }else if($scDays[$i] == 'wednesday'){
+    $we = true;
+  }else if($scDays[$i] == 'thursday'){
+    $th = true;
+  }else if($scDays[$i] == 'friday'){
+    $fr = true;
+  }else if($scDays[$i] == 'saturday'){
+    $sa = true;
+  }else if($scDays[$i] == 'sunday'){
+    $su = true;
+  }
+
+}
+
+//To Check the Additional Items
+$addItems = explode(",", $result['additional_items']);
+//echo $scDays[0];
+for($i=0; $i < count($addItems); $i++){
+  if($addItems[$i] == 'a'){
+    $ai_a = true;
+  }else if($addItems[$i] == 'b'){
+    $ai_b = true;
+  }else if($addItems[$i] == 'c'){
+    $ai_c = true;
+  }else if($addItems[$i] == 'd'){
+    $ai_d = true;
+  }else if($addItems[$i] == 'e'){
+    $ai_e = true;
+  }else if($addItems[$i] == 'f'){
+    $ai_f = true;
+  }else if($addItems[$i] == 'g'){
+    $ai_g = true;
+  }else if($addItems[$i] == 'h'){
+    $ai_h = true;
+  }else if($addItems[$i] == 'i'){
+    $ai_i = true;
+  }
+
+}
+
+
+
+
 ?>
 
 <!DOCTYPE html>
@@ -94,6 +149,35 @@ if(isset($_POST['syllabusFormSubmit'])){
         </div>
       </nav>
 
+      <div class="col-md-6 col-md-offset-3"><!--Start Editing navbar-->
+      <nav class="navbar navbar-default navbar-static-top">
+        <div class="container">
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+          </div>
+
+          <!-- Collect the nav links, forms, and other content for toggling -->
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+              <li><a href="#">View </a></li>
+              <li class="active"><a name="courseNumber"href="../edit-syllabus.php?courseNumber=<?php echo $db->querySingle("course_number", $class)?>">Edit</a></li>
+              <li><a href="#">Save</a></li>
+              
+            </ul>
+              </li>
+            </ul>
+          </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+      </nav>
+
+    </div><!--End editing Nav bar-->
+
 
       <div class="container">
         <div class="col-sm-3 col-md-2 sidebar">
@@ -120,18 +204,20 @@ if(isset($_POST['syllabusFormSubmit'])){
             <form class="form-horizontal" name="addForm" method="post" action="syllabus_html_template.php">
               <fieldset>
                 <!-- Form Name -->
-                <legend>Add a Syllabus</legend>
+                <legend>Edit Syllabus</legend>
 
 				<!-- Text input-->
 				<div class="form-group">
 				  <label class="col-md-4 control-label" for="courseNumber">Course Number:</label>  
 				  <div class="col-md-6">
-				  <input id="courseNumber" name="courseNumber" type="number" 
-				  placeholder="Enter Course Number" class="form-control input-md" required>
+				  <input id="courseNumber" name="courseNumber" type="number" value="<?php echo $course;?>" class="form-control input-md" required>
 					
 				  </div>
 				</div>
-
+        <div ><?php
+        //echo $resultArr['description'];
+        //'Results: '.$result;
+        ?></div>
 
                 <div class="form-group">
                   <label class="col-md-4 control-label" for="courseTitle">Course
@@ -139,7 +225,7 @@ if(isset($_POST['syllabusFormSubmit'])){
 
                     <div class="col-md-6">
                       <input class="form-control input-md" id="inputName" name=
-                      "courseTitle" placeholder="Enter Title" type="text" >
+                      "courseTitle" value="<?php echo $result['course_title'];?>" type="text" >
                     </div>
                   </div>
                   <!-- Text input-->
@@ -151,7 +237,7 @@ if(isset($_POST['syllabusFormSubmit'])){
 
                       <div class="col-md-6">
                         <input class="form-control input-md" id="contactHours" name=
-                        "contactHours" placeholder="Enter Contact Hourse"
+                        "contactHours" value="<?php echo $result['contact_hours'];?>"
                         type="number" >
                       </div>
                     </div>
@@ -164,7 +250,7 @@ if(isset($_POST['syllabusFormSubmit'])){
 
                       <div class="col-md-6">
                         <input class="form-control input-md" id="credits" name=
-                        "credits" placeholder="Enter Credits" type="number" >
+                        "credits" value="<?php echo $result['credits'];?>" type="number" >
                       </div>
                     </div>
                     <!-- Textarea -->
@@ -175,48 +261,73 @@ if(isset($_POST['syllabusFormSubmit'])){
                       "description">Description</label>
 
                       <div class="col-md-6">
-                        <textarea class="form-control" id="description" name="description" cols="56" rows="5"></textarea>
+                        <textarea class="form-control" id="description" name="description" cols="56" rows="5"><?php echo $result['description'];?></textarea>
                       </div>
                     </div>
                     <!-- Multiple Checkboxes (inline) -->
-
 
                     <div class="form-group">
                       <label class="col-md-4 control-label" for=
                       "schedule">Schedule</label>
 
                       <div class="col-md-6">
-                        <label class="checkbox-inline" for=
-                        "schedule-0"><input id="schedule-0" name="schedule[]"
-                        type="checkbox" value="monday"> Monday</label>
-                        <label class="checkbox-inline" for=
-                        "schedule-1"><input id="schedule-1" name="schedule[]"
-                        type="checkbox" value="tuesday"> Tuesday</label>
-                        <label class="checkbox-inline" for=
-                        "schedule-2"><input id="schedule-2" name="schedule[]"
-                        type="checkbox" value="wednesday">
-                        Wednesday</label> <label class="checkbox-inline"
-                        for="schedule-3"><input id="schedule-3" name=
-                        "schedule[]" type="checkbox" value="thursday">
-                        Thursday</label> <label class="checkbox-inline"
-                        for="schedule-4"><input id="schedule-4" name=
-                        "schedule[]" type="checkbox" value="friday">
-                        Friday</label> <label class="checkbox-inline" for=
-                        "schedule-5"><input id="schedule-5" name="schedule[]"
-                        type="checkbox" value="saturday"> Saturday</label>
-                        <label class="checkbox-inline" for=
-                        "schedule-6"><input id="schedule-6" name="schedule[]"
-                        type="checkbox" value="sunday"> Sunday</label>
+                        <label class="checkbox-inline" for="schedule-0">
+                          <input id="schedule-0" name="schedule[]" type="checkbox" value="monday" <?php if(isset($mo))echo 'checked';?>> 
+                          Monday
+                        </label>
+
+                        <label class="checkbox-inline" for="schedule-1">
+                          <input id="schedule-1" name="schedule[]" type="checkbox" value="tuesday" <?php if(isset($tu))echo 'checked';?>> 
+                          Tuesday
+                        </label>
+
+                        <label class="checkbox-inline" for="schedule-2">
+                          <input id="schedule-2" name="schedule[]" type="checkbox" value="wednesday"<?php if(isset($we))echo 'checked';?>>
+                          Wednesday
+                        </label> 
+
+                        <label class="checkbox-inline" for="schedule-3">
+                          <input id="schedule-3" name="schedule[]" type="checkbox" value="thursday" <?php if(isset($th))echo 'checked';?>>
+                          Thursday
+                        </label> 
+
+                        <label class="checkbox-inline" for="schedule-4">
+                          <input id="schedule-4" name="schedule[]" type="checkbox" value="friday" <?php if(isset($fr))echo 'checked';?>>
+                          Friday
+                        </label> 
+
+                        <label class="checkbox-inline" for="schedule-5">
+                          <input id="schedule-5" name="schedule[]" type="checkbox" value="saturday" <?php if(isset($sa))echo 'checked';?>> 
+                          Saturday
+                        </label>
+
+                        <label class="checkbox-inline" for="schedule-6">
+                          <input id="schedule-6" name="schedule[]" type="checkbox" value="sunday" <?php if(isset($su))echo 'checked';?>> 
+                          Sunday
+                        </label>
                       </div>
                     </div>
-                    <!-- Text input-->
+
+                    <!--Schedule Time-->
+                    <div class="form-group">
+                      <label class="col-md-4 control-label" for=
+                      "schedule_time">Scheduel Time</label>
+
+                      <div class="col-md-6">
+                        <input class="form-control input-md" id="schedule_time" name=
+                        "schedule_time" value="<?php echo $result['schedule_time'];?>"
+                        type="text">
+                      </div>
+                    </div>
+
+                    <!-- Location-->
                     <div class="form-group">
                       <label class="col-md-4 control-label" for=
                       "location">Location</label>
 
                       <div class="col-md-6">
                         <input class="form-control input-md" id="location" name=
-                        "location" placeholder="Enter the location"
+                        "location" value="<?php echo $result['location'];?>"
                         type="text">
                       </div>
                     </div>
@@ -227,7 +338,7 @@ if(isset($_POST['syllabusFormSubmit'])){
 
                       <div class="col-md-6">
                         <input class="form-control input-md" id="faculty1" name=
-                        "faculty[]" placeholder="Enter a Faculty Member"
+                        "faculty[]" value="<?php echo $result['faculty'];?>"
                         type="text">
                       </div>
                     </div>
@@ -250,7 +361,7 @@ if(isset($_POST['syllabusFormSubmit'])){
 					<div class="form-group">
 					  <label class="col-md-4 control-label" for="office_hours_time">Office Hours Time:</label>
 					  <div class="col-md-6">
-						<input id="office_hours_time" name="office_hours_time" type="text" placeholder="Ex: 11-2" class="form-control input-md">
+						<input id="office_hours_time" name="office_hours_time" type="text" value="<?php echo $result['office_hours'];?>" class="form-control input-md">
 					  </div>
 					</div>
 
@@ -295,7 +406,7 @@ if(isset($_POST['syllabusFormSubmit'])){
 
                         <div class="col-md-6">
                           <input class="form-control input-md" id="phoneNumber" name=
-                          "phoneNumber" placeholder="Enter Phone Number" type=
+                          "phoneNumber" value="<?php echo $result['phone'];?>" type=
                           "phone">
                         </div>
                       </div>
@@ -306,7 +417,7 @@ if(isset($_POST['syllabusFormSubmit'])){
 
                         <div class="col-md-6">
                           <input class="form-control input-md" id="email" name=
-                          "email" placeholder="Enter Email" type=
+                          "email" value="<?php echo $result['email'];?>" type=
                           "email">
                         </div>
                       </div>
@@ -317,7 +428,7 @@ if(isset($_POST['syllabusFormSubmit'])){
 
                         <div class="col-md-6">
                           <input class="form-control input-md" id="resources" name=
-                          "resources" placeholder="Enter Resources" type=
+                          "resources" value="<?php echo $result['resources'];?>" type=
                           "text">
                         </div>
                       </div>
@@ -330,40 +441,40 @@ if(isset($_POST['syllabusFormSubmit'])){
 
                         <div class="col-md-6">
                           <label class="checkbox" for="additionalItems-0">
-	                          <input id="additionalItems-0" name="additionalItems[]" type="checkbox" value="a"> 
+	                          <input id="additionalItems-0" name="additionalItems[]" type="checkbox" value="a" <?php if(isset($ai_a))echo 'checked';?>> 
 	                          Academic DishonestyPolicy
                           </label> 
                           <label class="checkbox" for="additionalItems-1">
-	                          <input id="additionalItems-1" name="additionalItems[]" type="checkbox" value="b"> 
+	                          <input id="additionalItems-1" name="additionalItems[]" type="checkbox" value="b"<?php if(isset($ai_b))echo 'checked';?>> 
 	                          Statement of Academic Integrity
                           </label> 
                           <label class="checkbox"
                           for="additionalItems-2"><input id=
                           "additionalItems-2" name="additionalItems[]" type=
-                          "checkbox" value="c"> Attendance
+                          "checkbox" value="c" <?php if(isset($ai_c))echo 'checked';?>> Attendance
                           Policy</label> <label class="checkbox" for=
                           "additionalItems-3"><input id="additionalItems-3"
                           name="additionalItems[]" type="checkbox" value=
-                          "d"> Professional
+                          "d" <?php if(isset($ai_d))echo 'checked';?>> Professional
                           Behavior Expectations</label> <label class=
                           "checkbox" for="additionalItems-4"><input id=
                           "additionalItems-4" name="additionalItems[]" type=
-                          "checkbox" value="e"> Electronic
+                          "checkbox" value="e" <?php if(isset($ai_e))echo 'checked';?>> Electronic
                           Devices</label> <label class="checkbox" for=
                           "additionalItems-5"><input id="additionalItems-5"
                           name="additionalItems[]" type="checkbox" value=
-                          "f"> Examinations</label> <label class=
+                          "f" <?php if(isset($ai_f))echo 'checked';?>> Examinations</label> <label class=
                           "checkbox" for="additionalItems-6"><input id=
                           "additionalItems-6" name="additionalItems[]" type=
-                          "checkbox" value="g">
+                          "checkbox" value="g" <?php if(isset($ai_g))echo 'checked';?>>
                           Academic Resource Center(ARC)</label> <label class=
                           "checkbox" for="additionalItems-7"><input id=
                           "additionalItems-7" name="additionalItems[]" type=
-                          "checkbox" value="h"> Disability
+                          "checkbox" value="h" <?php if(isset($ai_h))echo 'checked';?>> Disability
                           Services</label> <label class="checkbox" for=
                           "additionalItems-8"><input id="additionalItems-8"
                           name="additionalItems[]" type="checkbox" value=
-                          "i"> Grading Policy</label>
+                          "i" <?php if(isset($ai_i))echo 'checked';?>> Grading Policy</label>
                         </div>
                       </div>
                       <!-- Textarea -->
@@ -373,7 +484,7 @@ if(isset($_POST['syllabusFormSubmit'])){
 	                      	<label class='col-md-4 control-label' for='objectives'>Objective</label>
 	                      	<div class='col-md-6'>
 	                      		<div class='input-append'>
-	                      			<input id='objectives' name='objective[]' class='form-control input-md' placeholder='Objective' type='text'>
+	                      			<input id='objectives' name='objective[]' class='form-control input-md' value="<?php echo $result['objectives'];?>" type='text'>
 	                      		</div><!--End Input-append-->
 	                      	</div><!--End col-md-6-->
 	                      	<div class="col-md-2">
@@ -404,7 +515,7 @@ if(isset($_POST['syllabusFormSubmit'])){
 				<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2">
 				<div class="form-group">
                       <label class="col-md-4 control-label" for="addObjective"></label>
-					<button type="submit" name="syllabusFormSubmit" class="btn btn-default">Submit</button>
+					<button type="submit" name="syllabusFormSubmit" class="btn btn-default">Save</button>
 					</div>
 					</div>
 				</div>

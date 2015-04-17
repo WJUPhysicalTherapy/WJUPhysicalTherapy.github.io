@@ -52,7 +52,7 @@ $db = new Database('localhost', 'wjuphysi_nic', 'physical2015', 'wjuphysi_syllab
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="../faculty/profile/profile.php"><?php echo $db->queryProfile("first_name", $_SESSION['myusername']); echo  " "; echo $db->queryProfile("last_name", $_SESSION['myusername']); ?></a></li>
+            <li><a href="../faculty/profile/profile.php"><?php echo $db->queryProfile("first_name", $_SESSION['id']); echo  " "; echo $db->queryProfile("last_name", $_SESSION['id']); ?></a></li>
             <li><a href="../faculty/faculty.php">Dashboard</a></li>
             <li><a href="/login/logout.php">Logout</a></li>
           </ul>
@@ -75,11 +75,13 @@ $db = new Database('localhost', 'wjuphysi_nic', 'physical2015', 'wjuphysi_syllab
       <div class="starter-template">
       <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
       <h1>Select a Syllabus</h1>
+      <div class="file_button_container btn btn-default btn-lg btn-file"><span class="glyphicon glyphicon-upload" aria-hidden="true"></span>&nbsp;Upload Old Document<input type="file" value="Upload New Document" /></div>
+  <a href="add-syllabus.php"><button type="button" class="btn btn-default btn-lg">
+    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Create New Syllabus
+  </button></a>
+  <br/><br/>
       <div class="list-group" >
       <form method="post" action="classes/class3.php">
-      <!--<button type="submit" class="list-group-item" value="617" name="classNumber" style="width:100%;">Service Learning I</button><br/>
-      <button type="submit" class="list-group-item" value="627" name="classNumber" style="width:100%;">Service Learning II</button>
-      <button type="submit" class="list-group-item" value="627" name="classNumber" style="width:100%;"></button>-->
       <?php $db->queryFiles()?>
       </form>
 	</div>

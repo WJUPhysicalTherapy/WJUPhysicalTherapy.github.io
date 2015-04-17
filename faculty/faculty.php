@@ -1,5 +1,5 @@
 <?php session_start();
-  if(isset($_SESSION["myusername"])){
+  if(isset($_SESSION["id"])){
     //echo "Session Set";
   }else{
     echo $_SESSION['myusername'];
@@ -79,7 +79,7 @@ if(isset($_POST['orderBy'])){
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="/faculty/profile/profile.php?<?php echo $_POST['email']?>"><?php echo $db->queryProfile("first_name", $_SESSION['myusername']); echo  " "; echo $db->queryProfile("last_name", $_SESSION['myusername']); ?></a></li>
+            <li><a href="/faculty/profile/profile.php?<?php echo $_POST['email']?>"><?php echo $db->queryProfile("first_name", $_SESSION['id']); echo  " "; echo $db->queryProfile("last_name", $_SESSION['id']); ?></a></li>
             <li><a href="../faculty/faculty.php">Dashboard</a></li>
             <li><a href="/login/logout.php">Logout</a></li>
           </ul>
@@ -96,6 +96,7 @@ if(isset($_POST['orderBy'])){
           <ul class="nav nav-sidebar">
             <li class="active"><a href="faculty.php">Overview <span class="sr-only">(current)</span></a></li>
             <li><a href="documents.php">Documents</a></li>
+
             <li><a href="classes.html">Classes</a></li>
           </ul>
         </div>
@@ -104,7 +105,7 @@ if(isset($_POST['orderBy'])){
           <h2 class="sub-header">Classes</h2>
           <div class="table-responsive">
 		  <!--Seach Bar-->
-		  <form action="faculty-search.php" method="post">
+		  <form action="faculty.php" method="post">
 		  <div class="col-md-3 col-md-offset-3 pull-right">
 			<div class="input-group">
 			  <input name="search" type="text" class="form-control" placeholder="Search taxonomy...">

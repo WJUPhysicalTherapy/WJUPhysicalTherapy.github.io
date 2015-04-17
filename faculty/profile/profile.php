@@ -1,6 +1,6 @@
 <?php session_start();
-  if(isset($_SESSION["myusername"])){
-    $session = $_SESSION['myusername'];
+  if(isset($_SESSION["id"])){
+    $session = $_SESSION['id'];
   }else{
     echo $_SESSION['myusername'];
     header("location:../../index.html");
@@ -26,19 +26,19 @@ if($_POST["password"] === $_POST["cpassword"]){
 
 //echo $name;
 if($fname != ""){
-  $db->update("profiles", "first_name='".$fname."'"," id = 1");
+  $db->update("profiles", "first_name='".$fname."'", " id ='".$session."'");
 }
 if($lname != ""){
-  $db->update("profiles", "last_name='".$lname."'"," id = 1");
+  $db->update("profiles", "last_name='".$lname."'"," id ='".$session."'");
 }
 if($email != ""){
-  $db->update("profiles", "email='".$email."'"," id = 1");
+  $db->update("profiles", "email='".$email."'"," id ='".$session."'");
 }
 if($username != ""){
-  $db->update("profiles", "username='".$username."'"," id = 1");
+  $db->update("profiles", "username='".$username."'"," id ='".$session."'");
 }
 if($pword != "" && $pmatch != false){
-  $db->update("profiles", "password='".$pword."'"," id = 1");
+  $db->update("profiles", "password='".$pword."'"," id ='".$session."'");
 }
 
 ?>
